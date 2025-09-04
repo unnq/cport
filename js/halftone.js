@@ -8,7 +8,7 @@
     edgeSoft: 0.2,      // edge falloff softness (smaller = tighter vignette)
     opacity: 0.22,      // dot darkness; higher = darker (on near-black bg)
     dpr: 2,             // render scale for crispness
-    dotRGB: [0, 0, 0]   // dark dots; use [255,255,255] for light dots
+    dotRGB: [5, 5, 5]   // dark dots; use [255,255,255] for light dots
   };
 
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
