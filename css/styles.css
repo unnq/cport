@@ -10,8 +10,8 @@
   --container-w: min(92vw, 1100px);
   --radius: 16px;
 
-  --nav-blur: 10px;
-  --nav-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --nav-blur: 4px;
+  --nav-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 /* Base */
@@ -46,7 +46,6 @@ a{ color: var(--ink); text-decoration: none; }
   background: rgba(255,255,255,0.06); /* glass for dark mode */
   backdrop-filter: blur(var(--nav-blur)) saturate(120%) brightness(110%);
   -webkit-backdrop-filter: blur(var(--nav-blur)) saturate(120%) brightness(110%);
-  border: 1px solid var(--hairline);
   border-radius: var(--radius);
   padding: 10px 16px;
   display: flex;
@@ -62,7 +61,7 @@ a{ color: var(--ink); text-decoration: none; }
   inset:0;
   border-radius: var(--radius);
   pointer-events:none;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.15);
   mix-blend-mode: screen;
 }
 
