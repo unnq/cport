@@ -2,7 +2,7 @@
    Design Tokens
    ========================= */
 :root {
-  --deepblack: #0e0e10;   /* near-black background */
+  --deepblack: #0a0a0a;   /* near-black background */
   --closewhite: #fcfcfc;  /* slightly off-white text */
   --lightgray: #f2f1f0;   /* subtle light gray accent */
 }
