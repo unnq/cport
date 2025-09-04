@@ -4,19 +4,25 @@
     dpr: 2,            // render scale
     fps: 30,           // cap the refresh rate
     opacity: 0.06,     // overall strength (0..1)
-    scale: 2,          // 1 = very fine, higher = chunkier grain
+    scale: 2,          // 1 = fine, higher = chunkier
     tile: 128,         // base tile size (CSS px before DPR & scale)
     layers: 2,         // blend N independently reseeded layers
     monochrome: true,  // true = grayscale noise
-    blend: "normal",   // "normal", "screen", "multiply", "overlay" etc.
+    blend: "normal",   // "normal", "screen", "overlay", etc.
   };
 
   function makeNoiseTile(sizePx, monochrome) {
-    const c = new OffscreenCanvas ? new OffscreenCanvas(sizePx, sizePx)
-                                  : document.createElement("canvas");
-    c.width = c.height = sizePx;
+    const w = sizePx, h = sizePx;
+    let c;
+    if (typeof OffscreenCanvas !== "undefined") {
+      c = new OffscreenCanvas(w, h);
+    } else {
+      c = document.createElement("canvas");
+      c.width = w;
+      c.height = h;
+    }
     const g = c.getContext("2d", { willReadFrequently: true });
-    const img = g.createImageData(sizePx, sizePx);
+    const img = g.createImageData(w, h);
     const data = img.data;
     for (let i = 0; i < data.length; i += 4) {
       if (monochrome) {
@@ -60,24 +66,20 @@
       ctx.globalCompositeOperation = SETTINGS.blend;
       ctx.imageSmoothingEnabled = false;
 
-      // Recreate fresh tiles each layer for true static
       for (let i = 0; i < SETTINGS.layers; i++) {
         const tileCSS = Math.max(16, (SETTINGS.tile / SETTINGS.scale) | 0);
         const tile = makeNoiseTile(tileCSS * SETTINGS.dpr, SETTINGS.monochrome);
         const pat = ctx.createPattern(tile, "repeat");
-        // Slight random jitter per layer to break uniformity
         const jx = Math.random() * tileCSS;
         const jy = Math.random() * tileCSS;
 
         ctx.save();
         ctx.translate(jx, jy);
         ctx.fillStyle = pat;
-        // Overfill to avoid seams at edges
         ctx.fillRect(-tileCSS, -tileCSS, width + tileCSS * 2, height + tileCSS * 2);
         ctx.restore();
       }
 
-      // Reset for next frame
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = "source-over";
     }
@@ -91,11 +93,9 @@
       raf = requestAnimationFrame(tick);
     }
 
-    // Observe size changes
     const ro = new ResizeObserver(resize);
     ro.observe(el);
 
-    // Public toggles (optional)
     el.noise = {
       setOpacity(v) { SETTINGS.opacity = v; },
       setFps(v) { SETTINGS.fps = Math.max(1, v|0); },
@@ -106,7 +106,6 @@
       once(){ redraw(); },
     };
 
-    // init
     resize();
     raf = requestAnimationFrame(tick);
   }
