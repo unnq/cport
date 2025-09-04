@@ -1,14 +1,27 @@
-/* Base */
+/* =========================
+   Design Tokens
+   ========================= */
+:root {
+  --deepblack: #0e0e10;   /* near-black background */
+  --closewhite: #fcfcfc;  /* slightly off-white text */
+  --lightgray: #f2f1f0;   /* subtle light gray accent */
+}
+
+/* =========================
+   Base
+   ========================= */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
   margin: 0;
-  background: #0e0e10;     /* near-black */
-  color: #fcfcfc;           /* requested white */
+  background: var(--deepblack);
+  color: var(--closewhite);
   font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-/* Navbar: transparent, fixed, 4vh */
+/* =========================
+   Navbar
+   ========================= */
 nav {
   position: fixed;
   top: 0;
@@ -17,11 +30,10 @@ nav {
   height: 4vh;
   display: flex;
   align-items: center;
-  background: transparent;  /* stays see-through */
+  background: transparent;
   z-index: 10;
 }
 
-/* Full-width menu, spaced edge-to-edge */
 nav ul {
   margin: 0;
   padding: 0;
@@ -32,50 +44,57 @@ nav ul {
   align-items: center;
 }
 
-/* Links minimal styling */
 nav a {
   display: block;
   text-decoration: none;
-  color: #fcfcfc;
+  color: var(--closewhite);
   font-weight: 500;
-  padding: 0 1rem;          /* keep click targets comfy without adding page margins */
-  line-height: 4vh;         /* matches nav height */
+  padding: 0 1rem;
+  line-height: 4vh;
 }
-nav a:hover { opacity: 0.75; }
+nav a:hover {
+  color: var(--lightgray); /* subtle hover using light gray */
+}
 
-/* Hero: 60vh, bottom-left aligned, full-bleed edges */
+/* =========================
+   Hero
+   ========================= */
 #hero {
   min-height: 60vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;  /* push text to bottom */
-  align-items: flex-start;     /* align left */
-  padding-top: 4vh;            /* account for fixed nav overlap */
-  /* no left/right margins so it feels full-bleed */
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: 4vh;  /* avoids overlap with navbar */
 }
 
-/* Tight subtitle just above the title */
 #hero .subtitle {
-  margin: 0 0 0.25rem 0;       /* sits close to the title */
+  margin: 0 0 0.25rem 0;
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
-  opacity: 0.85;
+  color: var(--lightgray);  /* softer tone for subtitle */
 }
 
-/* Big newspaper-style headline */
 #hero h1 {
   margin: 0;
   line-height: 0.95;
   letter-spacing: -0.02em;
   font-weight: 700;
-  font-size: clamp(3rem, 12vw, 12rem);  /* scales boldly */
+  font-size: clamp(3rem, 12vw, 12rem);
+  color: var(--closewhite);
 }
 
-/* Placeholder section to see flow */
+/* =========================
+   Next Section (Placeholder)
+   ========================= */
 #next {
   min-height: 60vh;
   display: grid;
   place-items: center;
   padding: 2rem 0;
   border-top: 1px solid rgba(255,255,255,0.06);
+  background: var(--deepblack);
 }
-#next p { margin: 0; opacity: 0.9; }
+#next p {
+  margin: 0;
+  color: var(--lightgray);
+}
