@@ -88,7 +88,7 @@ nav a:hover {
   line-height: 0.95;
   letter-spacing: -0.02em;
   font-weight: 600;
-  font-size: clamp(3rem, 19vw, 22rem);
+  font-size: clamp(6rem, 23.5vw, 32rem);
   color: var(--closewhite);
   font-family: var(--font-title);
 }
