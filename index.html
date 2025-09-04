@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Dark Glass Starter</title>
+
+  <!-- Optional: Playfair for brand (nav-left). Remove if you prefer system fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       Design Tokens (Dark)
+       ========================= */
+    :root{
+      --bg-dark: #0f1113;          /* page background (almost black) */
+      --ink: #fcfcfc;              /* main text */
+      --muted: #c7c7c7;            /* subtitles / secondary */
+      --hairline: rgba(255,255,255,0.08);
+
+      --container-w: min(92vw, 1100px);
+      --radius: 16px;
+
+      --nav-blur: 10px;
+      --nav-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    /* Base */
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.4;
+    }
+
+    a{ color: var(--ink); text-decoration: none; }
+
+    /* =========================
+       Glass Navbar
+       ========================= */
+    .nav{
+      position: fixed;
+      top: 2vh; /* stays floating a bit from top */
+      display: grid;
+      place-items: center;
+      width: 100%;
+      z-index: 50;
+      pointer-events: none; /* so only inner gets events */
+    }
+
+    .nav-inner{
+      width: var(--container-w);
+      position: relative;
+      background: rgba(255,255,255,0.06); /* glass for dark mode */
+      backdrop-filter: blur(var(--nav-blur)) saturate(120%) brightness(110%);
+      -webkit-backdrop-filter: blur(var(--nav-blur)) saturate(120%) brightness(110%);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: var(--nav-shadow);
+      pointer-events: auto; /* clickable */
+    }
+
+    .nav-inner::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: var(--radius);
+      pointer-events:none;
+      border: 1px solid rgba(255,255,255,0.25);
+      mix-blend-mode: screen;
+    }
+
+    .nav-left{
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      letter-spacing: .28rem;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-spacer{ flex: 1; }
+
+    .nav-right{
+      list-style: none;
+      display: flex;
+      gap: clamp(16px, 2.2vw, 28px);
+      margin: 0;
+      padding: 0;
+    }
+    .nav-right a{
+      color: var(--ink);
+      font-weight: 500;
+      opacity: 0.88;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .nav-right a:hover{ opacity: 1; transform: translateY(-1px); }
+    .nav-right a:focus-visible{
+      outline: 2px solid rgba(255,255,255,0.45);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* =========================
+       Hero
+       ========================= */
+    .hero{
+      position: relative;
+      height: 90vh;          /* requested size */
+      min-height: 520px;     /* safety for small screens */
+      display: grid;
+      place-items: center;
+      overflow: clip;
+      isolation: isolate;    /* makes overlay blending cleaner */
+    }
+
+    /* Background image + a subtle dark overlay for legibility */
+    .hero::before{
+      --hero-img: url('https://picsum.photos/id/1011/1920/1080'); /* placeholder */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+        var(--hero-img) center / cover no-repeat;
+      z-index: -2;
+    }
+
+    /* Soft vignette for edges */
+    .hero::after{
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(70% 60% at 50% 40%, transparent 0%, transparent 55%, rgba(0,0,0,0.25) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-inner{
+      width: var(--container-w);
+      padding: clamp(16px, 3vw, 32px);
+      text-align: center;
+    }
+
+    .hero-title{
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, "Segoe UI", Roboto, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin: 0 0 10px 0;
+      color: #fcfcfc;
+    }
+
+    .hero-subtitle{
+      color: var(--muted);
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+
+    /* Ensure content starts under nav visually (hero is behind nav as requested) */
+    main{ position: relative; }
+
+    /* Small screens: tighten right-side spacing */
+    @media (max-width: 600px){
+      .nav-left{ letter-spacing: .2rem; font-size: 1.05rem; }
+      .nav-right{ gap: 14px; }
+      .hero-subtitle{ max-width: 36ch; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Glass Navbar -->
+  <header class="nav">
+    <nav class="nav-inner">
+      <div class="nav-left">FRIEND NAME</div>
+      <div class="nav-spacer"></div>
+      <ul class="nav-right">
+        <li><a href="#">Work</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero (sits behind navbar) -->
+    <section class="hero" aria-label="Intro">
+      <div class="hero-inner">
+        <h1 class="hero-title">Placeholder Title in Helvetica</h1>
+        <p class="hero-subtitle">A clean dark-mode starter with a glass navbar and a big cinematic hero background. Swap this image and copy as we build.</p>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
