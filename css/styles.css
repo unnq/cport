@@ -5,6 +5,10 @@
   --deepblack: #0a0a0a;   /* near-black background */
   --closewhite: #fcfcfc;  /* slightly off-white text */
   --lightgray: #f2f1f0;   /* subtle light gray accent */
+
+  /* Fonts */
+  --font-body: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-title: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 /* =========================
@@ -16,7 +20,7 @@ body {
   margin: 0;
   background: var(--deepblack);
   color: var(--closewhite);
-  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family: var(--font-body);
 }
 
 h1 {
@@ -57,7 +61,7 @@ nav a {
   line-height: 4vh;
 }
 nav a:hover {
-  color: var(--lightgray); /* subtle hover using light gray */
+  color: var(--lightgray);
 }
 
 /* =========================
@@ -75,7 +79,7 @@ nav a:hover {
 #hero .subtitle {
   margin: 0 0 0.25rem 0;
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
-  color: var(--lightgray);  /* softer tone for subtitle */
+  color: var(--lightgray);
 }
 
 #hero h1 {
@@ -85,6 +89,7 @@ nav a:hover {
   font-weight: 600;
   font-size: clamp(3rem, 19vw, 22rem);
   color: var(--closewhite);
+  font-family: var(--font-title);
 }
 
 /* =========================
