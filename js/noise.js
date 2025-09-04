@@ -1,139 +1,115 @@
-// noise.js — reusable animated grain overlay for any [data-noise] element
+// noise.js — true static grain for any [data-noise] element
 (() => {
   const SETTINGS = {
-    dpr: 2,          // render scale for crispness
-    opacity: 0.06,   // overall grain strength (0..1)
-    scale: 2,        // visual size of the noise tile (1 = fine, higher = chunkier)
-    tile: 192,       // base tile size in CSS pixels before DPR
-    fps: 30,         // cap for animation (saves CPU)
-    speedX: 18,      // px/sec drift horizontally
-    speedY: 10,      // px/sec drift vertically
-    monochrome: true // grayscale noise (true) or RGB speckles (false)
+    dpr: 2,            // render scale
+    fps: 30,           // cap the refresh rate
+    opacity: 0.06,     // overall strength (0..1)
+    scale: 2,          // 1 = very fine, higher = chunkier grain
+    tile: 128,         // base tile size (CSS px before DPR & scale)
+    layers: 2,         // blend N independently reseeded layers
+    monochrome: true,  // true = grayscale noise
+    blend: "normal",   // "normal", "screen", "multiply", "overlay" etc.
   };
 
-  // Create a single noise tile (OffscreenCanvas if available, else normal canvas)
-  function makeNoiseTile(tileCssPx, dpr, monochrome) {
-    const w = Math.max(16, Math.floor(tileCssPx * dpr));
-    const h = w; // square tile
-    const off = typeof OffscreenCanvas !== "undefined"
-      ? new OffscreenCanvas(w, h)
-      : document.createElement("canvas");
-    off.width = w;
-    off.height = h;
-    const ictx = off.getContext("2d", { alpha: true, willReadFrequently: true });
-    const img = ictx.createImageData(w, h);
+  function makeNoiseTile(sizePx, monochrome) {
+    const c = new OffscreenCanvas ? new OffscreenCanvas(sizePx, sizePx)
+                                  : document.createElement("canvas");
+    c.width = c.height = sizePx;
+    const g = c.getContext("2d", { willReadFrequently: true });
+    const img = g.createImageData(sizePx, sizePx);
     const data = img.data;
-
     for (let i = 0; i < data.length; i += 4) {
       if (monochrome) {
-        const v = Math.random() * 255 | 0;
-        data[i + 0] = v; // R
-        data[i + 1] = v; // G
-        data[i + 2] = v; // B
+        const v = (Math.random() * 255) | 0;
+        data[i] = data[i + 1] = data[i + 2] = v;
       } else {
-        data[i + 0] = Math.random() * 255 | 0;
-        data[i + 1] = Math.random() * 255 | 0;
-        data[i + 2] = Math.random() * 255 | 0;
+        data[i] = (Math.random() * 255) | 0;
+        data[i + 1] = (Math.random() * 255) | 0;
+        data[i + 2] = (Math.random() * 255) | 0;
       }
-      data[i + 3] = 255; // full alpha; we control strength via globalAlpha
+      data[i + 3] = 255;
     }
-    ictx.putImageData(img, 0, 0);
-    return off;
+    g.putImageData(img, 0, 0);
+    return c;
   }
 
-  function setupNoise(el) {
-    const c = document.createElement("canvas");
-    c.className = "noise-canvas";
-    el.prepend(c);
-
-    const ctx = c.getContext("2d", { alpha: true });
-    const ro = new ResizeObserver(resize);
-    ro.observe(el);
-
-    let pattern = null;
-    let tileCanvas = null;
-    let lastTime = performance.now();
-    let acc = 0;
-    const frameTime = 1000 / SETTINGS.fps;
-
-    // drift offsets
-    let offX = 0, offY = 0;
+  function setup(el) {
+    const canvas = document.createElement("canvas");
+    canvas.className = "noise-canvas";
+    el.prepend(canvas);
+    const ctx = canvas.getContext("2d", { alpha: true });
+    let width = 1, height = 1;
+    let last = performance.now(), acc = 0, raf = 0;
+    const frame = 1000 / SETTINGS.fps;
 
     function resize() {
-      const rect = el.getBoundingClientRect();
-      const w = Math.max(1, rect.width | 0);
-      const h = Math.max(1, rect.height | 0);
-      const dpr = SETTINGS.dpr;
-
-      c.width = w * dpr;
-      c.height = h * dpr;
-      c.style.width = w + "px";
-      c.style.height = h + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // (Re)make noise tile & pattern at current DPR
-      tileCanvas = makeNoiseTile(SETTINGS.tile / SETTINGS.scale, dpr, SETTINGS.monochrome);
-      pattern = ctx.createPattern(tileCanvas, "repeat");
-
-      // Reset drift so edges look clean on resize
-      offX = offY = 0;
-      draw(); // draw once immediately
+      const r = el.getBoundingClientRect();
+      width = Math.max(1, r.width | 0);
+      height = Math.max(1, r.height | 0);
+      const d = SETTINGS.dpr;
+      canvas.width = width * d;
+      canvas.height = height * d;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.setTransform(d, 0, 0, d, 0, 0);
     }
 
-    function draw() {
-      if (!pattern) return;
-      const w = c.width / SETTINGS.dpr;
-      const h = c.height / SETTINGS.dpr;
-
-      ctx.clearRect(0, 0, w, h);
-      ctx.save();
+    function redraw() {
+      ctx.clearRect(0, 0, width, height);
       ctx.globalAlpha = SETTINGS.opacity;
+      ctx.globalCompositeOperation = SETTINGS.blend;
+      ctx.imageSmoothingEnabled = false;
 
-      // Translate so the pattern scrolls
-      ctx.translate(-offX, -offY);
-      ctx.fillStyle = pattern;
-      // Overfill slightly to avoid seams when drifting
-      ctx.fillRect(offX - tileCanvas.width, offY - tileCanvas.height, w + tileCanvas.width * 2, h + tileCanvas.height * 2);
-      ctx.restore();
+      // Recreate fresh tiles each layer for true static
+      for (let i = 0; i < SETTINGS.layers; i++) {
+        const tileCSS = Math.max(16, (SETTINGS.tile / SETTINGS.scale) | 0);
+        const tile = makeNoiseTile(tileCSS * SETTINGS.dpr, SETTINGS.monochrome);
+        const pat = ctx.createPattern(tile, "repeat");
+        // Slight random jitter per layer to break uniformity
+        const jx = Math.random() * tileCSS;
+        const jy = Math.random() * tileCSS;
+
+        ctx.save();
+        ctx.translate(jx, jy);
+        ctx.fillStyle = pat;
+        // Overfill to avoid seams at edges
+        ctx.fillRect(-tileCSS, -tileCSS, width + tileCSS * 2, height + tileCSS * 2);
+        ctx.restore();
+      }
+
+      // Reset for next frame
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = "source-over";
     }
 
     function tick(now) {
-      const dt = now - lastTime;
-      lastTime = now;
-      acc += dt;
-
-      // advance drift continuously
-      offX += (SETTINGS.speedX * dt) / 1000;
-      offY += (SETTINGS.speedY * dt) / 1000;
-
-      // wrap offsets to keep numbers small
-      const wrapX = (tileCanvas?.width || 1) / SETTINGS.dpr;
-      const wrapY = (tileCanvas?.height || 1) / SETTINGS.dpr;
-      if (offX > wrapX) offX -= wrapX;
-      if (offY > wrapY) offY -= wrapY;
-
-      // cap draw rate
-      if (acc >= frameTime) {
-        draw();
+      const dt = now - last; last = now; acc += dt;
+      if (acc >= frame) {
+        redraw();
         acc = 0;
       }
       raf = requestAnimationFrame(tick);
     }
 
-    let raf = requestAnimationFrame(tick);
+    // Observe size changes
+    const ro = new ResizeObserver(resize);
+    ro.observe(el);
 
-    // Public-ish controls for convenience
+    // Public toggles (optional)
     el.noise = {
       setOpacity(v) { SETTINGS.opacity = v; },
-      setSpeed(x, y) { SETTINGS.speedX = x; SETTINGS.speedY = y; },
-      pause() { cancelAnimationFrame(raf); },
-      resume() { lastTime = performance.now(); raf = requestAnimationFrame(tick); },
-      remake() { resize(); },
+      setFps(v) { SETTINGS.fps = Math.max(1, v|0); },
+      setScale(v) { SETTINGS.scale = Math.max(0.5, v); },
+      setLayers(n){ SETTINGS.layers = Math.max(1, n|0); },
+      pause(){ cancelAnimationFrame(raf); },
+      resume(){ last = performance.now(); raf = requestAnimationFrame(tick); },
+      once(){ redraw(); },
     };
 
-    // initial
+    // init
     resize();
+    raf = requestAnimationFrame(tick);
   }
 
-  document.querySelectorAll("[data-noise]").forEach(setupNoise);
+  document.querySelectorAll("[data-noise]").forEach(setup);
 })();
