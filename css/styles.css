@@ -79,11 +79,11 @@ nav a:hover {
 }
 
 #hero h1 {
-  margin: 0;
+  margin: 0 0 0 -2vw;
   line-height: 0.95;
   letter-spacing: -0.02em;
-  font-weight: 700;
-  font-size: clamp(3rem, 12vw, 12rem);
+  font-weight: 600;
+  font-size: clamp(3rem, 19vw, 22rem);
   color: var(--closewhite);
 }
 
