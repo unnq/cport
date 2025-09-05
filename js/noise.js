@@ -2,10 +2,10 @@
 (() => {
   const SETTINGS = {
     dpr: 2,            // render scale
-    fps: 30,           // cap the refresh rate
+    fps: 16,           // cap the refresh rate
     opacity: 0.06,     // overall strength (0..1)
     scale: 2,          // 1 = fine, higher = chunkier
-    tile: 64,         // base tile size (CSS px before DPR & scale)
+    tile: 160,         // base tile size (CSS px before DPR & scale)
     layers: 2,         // blend N independently reseeded layers
     monochrome: true,  // true = grayscale noise
     blend: "normal",   // "normal", "screen", "overlay", etc.
