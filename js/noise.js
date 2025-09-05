@@ -1,4 +1,4 @@
-// noise.js — true static grain for any [data-noise] element
+e// noise.js — true static grain for any [data-noise] element
 (() => {
   const SETTINGS = {
     dpr: 2,            // render scale
@@ -55,8 +55,8 @@
       const d = SETTINGS.dpr;
       canvas.width = width * d;
       canvas.height = height * d;
-      canvas.style.width = width + 5 + "px";
-      canvas.style.height = height + 5 + "px";
+      canvas.style.width = width + "5px";
+      canvas.style.height = height + "5px";
       ctx.setTransform(d, 0, 0, d, 0, 0);
     }
 
