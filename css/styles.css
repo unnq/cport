@@ -124,7 +124,6 @@ h1 { margin: 0; }
    Footer
    ========================= */
 #site-footer {
-  background: var(--closewhite);
   color: var(--deepblack);
   min-height: 35vh;
   display: grid;
