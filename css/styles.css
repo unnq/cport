@@ -387,6 +387,8 @@ figure { margin: 0; }
   align-items: center;
   gap: 0.5ch;
   font-size: 0.95rem;
+  padding-top: 12vh;
+  padding-bottom: 12vh;
 }
 #portpreview .port-cta .arrow {
   font-size: 1.1em;
