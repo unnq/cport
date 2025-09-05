@@ -1,4 +1,4 @@
-e// noise.js — true static grain for any [data-noise] element
+// noise.js — true static grain for any [data-noise] element
 (() => {
   const SETTINGS = {
     dpr: 2,            // render scale
