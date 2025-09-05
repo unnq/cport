@@ -305,6 +305,11 @@ figure { margin: 0; }
   padding-top: 16vh; 
 }
 
+#portpreview .port-top {
+   display: flex;
+   background-color: var(--closewhite);
+}
+
 /* Title with top space + your negative offsets */
 #portpreview .port-title {
   color: var(--deepblack);
