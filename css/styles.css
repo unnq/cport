@@ -659,7 +659,7 @@ figure { margin: 0; }
   background: var(--lightgray);          /* #f2f1f0 */
   color: var(--deepblack);
   border: 1px solid rgba(0,0,0,0.12);
-  border-radius: 12px;
+  border-radius: 1px;
   padding: clamp(16px, 3vw, 24px);
   box-shadow: 0 24px 80px rgba(0,0,0,0.5);
 }
