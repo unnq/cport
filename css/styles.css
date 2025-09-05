@@ -64,6 +64,11 @@ nav a:hover {
   color: var(--lightgray);
 }
 
+.site-nav { position: fixed; top: 0; /* …rest */ }
+.site-nav ul { /* … */ }
+.site-nav a  { /* … */ }
+
+
 /* =========================
    Hero
    ========================= */
