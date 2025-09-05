@@ -228,7 +228,7 @@ figure { margin: 0; }
 .footer-tag { margin: 0; max-width: 40ch; line-height: 1.4; color: #222; }
 .footer-arrow {
   position: absolute;
-  right: 0; bottom: 0;
+  right: 1em; bottom: 0;
   font-size: clamp(20px, 2.2vw, 28px);
   line-height: 1;
 }
