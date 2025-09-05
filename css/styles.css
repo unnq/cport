@@ -337,6 +337,8 @@ figure { margin: 0; }
 }
 
 .exspot {
+   display: flex;
+   flex-direction: column;
    color: var(--deepblack);
    font-family: var(--font-title);
    font-weight: 700;
