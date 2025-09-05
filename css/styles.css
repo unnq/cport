@@ -349,8 +349,8 @@ h2 { margin: 0; }
 
 /* CTA line under the panel */
 #portpreview .port-cta {
-  margin: 12px 10px 40px; /* small left/right echoing the panel padding */
-  color: var(--deepblack);
+  margin: auto; /* small left/right echoing the panel padding */
+  color: var(--closewhite);
   display: inline-flex;
   align-items: center;
   gap: 0.5ch;
