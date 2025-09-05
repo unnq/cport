@@ -44,7 +44,7 @@
     canvas.className = "noise-canvas";
     el.prepend(canvas);
     const ctx = canvas.getContext("2d", { alpha: true });
-    let width = 1, height = 1;
+    let width = 1.01, height = 1.01;
     let last = performance.now(), acc = 0, raf = 0;
     const frame = 1000 / SETTINGS.fps;
 
