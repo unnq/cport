@@ -1,5 +1,4 @@
-<!-- Place this AFTER the modal HTML and before </body> is fine when using defer -->
-<script defer>
+
   (function () {
     function ready(fn){ 
       if (document.readyState !== 'loading') fn();
@@ -40,4 +39,4 @@
       window.openContact = openModal;
     });
   })();
-</script>
+
