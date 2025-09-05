@@ -391,14 +391,13 @@ figure { margin: 0; }
 
 /* CTA line under the panel */
 #portpreview .port-cta {
-  margin: auto; /* small left/right echoing the panel padding */
+  margin: 12vh auto 12vh auto;
+  border-bottom: 1px dashed;
   color: var(--closewhite);
   display: inline-flex;
   align-items: center;
   gap: 0.5ch;
-  font-size: 0.95rem;
-  padding-top: 12vh;
-  padding-bottom: 12vh;
+  line-height: .5em;
 }
 #portpreview .port-cta .arrow {
   font-size: 1.1em;
