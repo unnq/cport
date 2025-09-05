@@ -175,6 +175,35 @@
     </div>
   </footer>
 
+  <!-- Contact Modal -->
+<div class="modal" id="contactModal" role="dialog" aria-modal="true"
+     aria-labelledby="contactTitle" hidden>
+  <!-- Backdrop (click to close) -->
+  <div class="modal-backdrop" data-close></div>
+
+  <!-- Window -->
+  <div class="modal-window" role="document">
+    <button class="modal-x" type="button" aria-label="Close" data-close>╳</button>
+
+    <h3 id="contactTitle" class="modal-title">Contact</h3>
+
+    <form class="contact-form" action="#" method="dialog">
+      <label for="cName">Name</label>
+      <input id="cName" type="text" autocomplete="name" />
+
+      <label for="cEmail">Email</label>
+      <input id="cEmail" type="email" autocomplete="email" />
+
+      <label for="cMsg">Message</label>
+      <textarea id="cMsg" rows="4"></textarea>
+
+      <!-- Demo-only button -->
+      <button class="send-demo" type="button">Send (demo)</button>
+    </form>
+  </div>
+</div>
+
+
   <script src="js/halftone.js"></script>
   <script src="js/noise.js"></script>
 </body>
