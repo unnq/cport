@@ -302,16 +302,16 @@ figure { margin: 0; }
    ========================= */
 #portpreview {
   background-color: var(--closewhite);
+  padding-top: 16vh; 
 }
 
 /* Title with top space + your negative offsets */
 #portpreview .port-title {
-  margin: 48px 0 -2vw -2vw;  /* top | right | bottom | left */
   color: var(--deepblack);
   font-family: var(--font-title);
   font-weight: 700;
   letter-spacing: -0.01em;
-  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  font-size: clamp(3rem, 8vw, 12rem);
   line-height: 1;
   background-color: var(--closewhite);
 }
