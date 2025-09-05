@@ -632,3 +632,97 @@ figure { margin: 0; }
    keep it higher; if you want it under grain too, change 200 -> 0. */
 #portpreview .port-top .port-hud { z-index: 200; }
 #portpreview .port-top .noise-canvas { z-index: 60; }
+
+
+/* =========================
+   Contact Modal
+   ========================= */
+.modal[hidden] { display: none; }
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000; /* above grain and HUD */
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(2px);
+}
+
+.modal-window {
+  position: relative;
+  width: min(520px, 92vw);
+  margin: 10vh auto 0;
+  background: var(--lightgray);          /* #f2f1f0 */
+  color: var(--deepblack);
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: clamp(16px, 3vw, 24px);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+}
+
+.modal-title {
+  margin: 0 0 12px 0;
+  font-family: var(--font-title);
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  letter-spacing: 0.01em;
+}
+
+.modal-x {
+  position: absolute;
+  top: 10px; right: 12px;
+  background: none;
+  border: none;
+  color: var(--deepblack);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contact-form {
+  display: grid;
+  gap: 12px;
+}
+
+.contact-form label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--deepblack);
+}
+
+.contact-form input,
+.contact-form textarea {
+  border: none;
+  border-bottom: 1px solid var(--deepblack);
+  background: transparent;
+  color: var(--deepblack);
+  padding: 8px 0;
+  outline: none;
+  font-family: var(--font-body);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-bottom-color: #000;
+}
+
+.send-demo {
+  margin-top: 6px;
+  align-self: start;
+  background: transparent;
+  color: var(--deepblack);
+  border: 1px dashed var(--deepblack);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+body.modal-open { overflow: hidden; } /* prevent page scroll while open */
+
+/* Respect reduced motion users: no animated open/close for now */
+@media (prefers-reduced-motion: reduce) {
+  .modal-window { transition: none !important; }
+}
