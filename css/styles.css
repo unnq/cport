@@ -63,7 +63,7 @@ figure { margin: 0; }
 .site-nav a:hover { color: var(--lightgray); }
 
 /* =========================
-   Hero (100vh desktop, 86vh mobile)
+   Hero (100vh desktop, 90vh mobile)
    Grid: top 75% content, bottom 25% white strip
    ========================= */
 #hero {
@@ -78,7 +78,7 @@ figure { margin: 0; }
 }
 
 @media (max-width: 768px) {
-  #hero { height: 86vh; }        /* mobile */
+  #hero { height: 90vh; }        /* mobile */
 }
 
 .hero-top {
