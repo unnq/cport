@@ -317,9 +317,13 @@ figure { margin: 0; }
   font-family: var(--font-title);
   font-weight: 700;
   letter-spacing: -0.01em;
-  font-size: clamp(3rem, 8vw, 12rem);
+  
   line-height: 1;
   background-color: var(--closewhite);
+}
+
+#portpreview .port-title h2 {
+   font-size: clamp(3rem, 8vw, 12rem);
 }
 
 .exspot {
