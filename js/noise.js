@@ -44,14 +44,14 @@
     canvas.className = "noise-canvas";
     el.prepend(canvas);
     const ctx = canvas.getContext("2d", { alpha: true });
-    let width = 1.01, height = 1.01;
+    let width = 1, height = 1;
     let last = performance.now(), acc = 0, raf = 0;
     const frame = 1000 / SETTINGS.fps;
 
     function resize() {
       const r = el.getBoundingClientRect();
-      width = Math.max(1, r.width | 0);
-      height = Math.max(1, r.height | 0);
+      width = Math.max(1.01, r.width | 0);
+      height = Math.max(1.01, r.height | 0);
       const d = SETTINGS.dpr;
       canvas.width = width * d;
       canvas.height = height * d;
