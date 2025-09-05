@@ -326,8 +326,6 @@ h2 { margin: 0; }
 #portpreview .portpanel .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  padding: 10px;
 }
 
 /* each cell crops its image to fill */
