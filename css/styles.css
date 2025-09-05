@@ -302,12 +302,13 @@ figure { margin: 0; }
    ========================= */
 #portpreview {
   background-color: var(--closewhite);
-  padding-top: 16vh; 
+  
 }
 
 #portpreview .port-top {
    display: flex;
    background-color: var(--closewhite);
+   padding-top: 16vh; 
 }
 
 /* Title with top space + your negative offsets */
