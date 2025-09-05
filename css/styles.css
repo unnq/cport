@@ -120,6 +120,9 @@ h1 { margin: 0; }
   z-index: 0;
 }
 
+[data-noise] .noise-canvas { inset:-1px 0 -1px 0; }
+
+
 /* =========================
    Footer
    ========================= */
