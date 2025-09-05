@@ -50,13 +50,13 @@
 
     function resize() {
       const r = el.getBoundingClientRect();
-      width = Math.max(1.01, r.width | 0);
-      height = Math.max(1.01, r.height | 0);
+      width = Math.max(1, r.width | 0);
+      height = Math.max(1, r.height | 0);
       const d = SETTINGS.dpr;
       canvas.width = width * d;
       canvas.height = height * d;
-      canvas.style.width = width + "5px";
-      canvas.style.height = height + "5px";
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
       ctx.setTransform(d, 0, 0, d, 0, 0);
     }
 
