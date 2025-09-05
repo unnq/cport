@@ -306,10 +306,19 @@ figure { margin: 0; }
 }
 
 #portpreview .port-top {
+   box-sizing: border-box;
    display: flex;
    background-color: var(--closewhite);
    padding-top: 20vh; 
    height: 65vh;
+}
+
+/* mobile override */
+@media (max-width: 768px) {
+  #portpreview .port-top {
+    height: 45vh;
+    padding-top: 12vh;
+  }
 }
 
 /* Title with top space + your negative offsets */
