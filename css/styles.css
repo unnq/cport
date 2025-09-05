@@ -107,6 +107,7 @@ figure { margin: 0; }
 .hero-strip {
   grid-row: 2;
   background: var(--closewhite);
+  height: 40vh;
 }
 
 /* =========================
