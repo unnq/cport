@@ -322,6 +322,71 @@ figure { margin: 0; }
   text-decoration: none;
 }
 
+/* Ensure .port-top is the positioning context (you already have position:relative) */
+#portpreview .port-top { position: relative; }
+
+/* Bottom overlay container */
+#portpreview .port-top .port-hud {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  height: 28px;                 /* same height for all items */
+  z-index: 4;                   /* above grain */
+  pointer-events: none;         /* let only the arrow be clickable */
+}
+
+/* Left: 2025 */
+#portpreview .port-top .hud-left {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.2vw, 14px);
+  letter-spacing: 0.04em;
+  color: var(--deepblack);
+  opacity: 0.85;
+  pointer-events: auto;
+}
+
+/* Center: Scroll to explore (true center, regardless of left/right widths) */
+#portpreview .port-top .hud-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.2vw, 14px);
+  letter-spacing: 0.06em;
+  color: var(--deepblack);
+  opacity: 0.9;
+  pointer-events: auto;
+}
+
+/* Right: arrow */
+#portpreview .port-top .port-arrow {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: clamp(18px, 2.2vw, 28px);
+  line-height: 1;
+  color: var(--deepblack);
+  text-decoration: none;
+  pointer-events: auto;          /* clickable */
+}
+
+/* Keep grain behind the HUD */
+#portpreview .port-top .noise-canvas { z-index: 2; }
+
+/* Tighten on small screens */
+@media (max-width: 768px) {
+  #portpreview .port-top .port-hud { left: 10px; right: 10px; bottom: 10px; height: 24px; }
+  #portpreview .port-top .hud-left,
+  #portpreview .port-top .hud-center { font-size: 12px; }
+}
+
+
 #portpreview .port-top .noise-canvas { z-index: 2; }
 #portpreview .port-top .port-arrow   { z-index: 3; }
 
