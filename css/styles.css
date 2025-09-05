@@ -103,12 +103,80 @@ figure { margin: 0; }
   font-family: var(--font-title);
 }
 
-/* bottom white strip inside hero */
+/* --- Hero strip: content layout --- */
 .hero-strip {
   grid-row: 2;
   background: var(--closewhite);
-  height: 40vh;
+  height: 40vh;                       /* your existing height */
+  color: var(--deepblack);             /* dark text on white */
+  border-top: 1px solid rgba(0,0,0,0.08);
+  position: relative;
 }
+
+.hero-strip-inner{
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: clamp(8px, 1.5vw, 16px);
+  padding: clamp(16px, 3vw, 28px);
+  /* give breathing room under the big CUTLASS overlap */
+  padding-top: clamp(24px, 6vw, 56px);
+}
+
+/* small section label */
+.collections-title{
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* 3 columns */
+.collections-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.2vw, 32px);
+  align-items: start;
+}
+
+/* column blocks */
+.collection-col h3{
+  margin: 0 0 8px 0;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.collection-col ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.collection-col a{
+  text-decoration: none;
+  color: var(--deepblack);
+  font-weight: 500;
+}
+
+.collection-col a:hover{ opacity: .7; }
+
+/* mobile stacking */
+@media (max-width: 900px){
+  .collections-grid{
+    grid-template-columns: 1fr;
+    gap: clamp(12px, 3vw, 18px);
+  }
+}
+
+/* keep grain above, content below (matches your pattern) */
+#hero[data-noise] .noise-canvas { z-index: 60; }
+.hero-strip, .hero-strip * { position: relative; z-index: 0; }
+
 
 /* =========================
    Next Section: 3-up gallery, no gaps
