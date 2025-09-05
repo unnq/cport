@@ -306,12 +306,25 @@ figure { margin: 0; }
 }
 
 #portpreview .port-top {
+   position: relative;
    box-sizing: border-box;
    display: flex;
    background-color: var(--closewhite);
    padding-top: 20vh; 
    height: 65vh;
 }
+#portpreview .port-top .port-arrow {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  font-size: clamp(18px, 2.2vw, 28px);
+  line-height: 1;
+  color: var(--deepblack);
+  text-decoration: none;
+}
+
+#portpreview .port-top .noise-canvas { z-index: 2; }
+#portpreview .port-top .port-arrow   { z-index: 3; }
 
 /* mobile override */
 @media (max-width: 768px) {
