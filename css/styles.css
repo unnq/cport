@@ -292,3 +292,75 @@ h1 { margin: 0; }
   .footer-nav-social { grid-column: 1; grid-template-columns: 1fr 1fr; }
   .footer-logo-slot { grid-column: 1; margin-top: 16px; min-height: 80px; }
 }
+
+/* =========================
+   Port Preview
+   ========================= */
+#portpreview {
+  background: var(--closewhite);
+}
+
+/* Title with top space + your negative offsets */
+#portpreview .port-title {
+  margin: 48px 0 -2vw -2vw;  /* top | right | bottom | left */
+  color: var(--deepblack);
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  line-height: 1;
+}
+
+/* Black panel that hosts the grid and the grain */
+#portpreview .portpanel {
+  background: #000;
+  position: relative;   /* anchor for noise canvas */
+}
+
+/* 2x2 grid with 10px padding and 10px gap */
+#portpreview .portpanel .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+/* each cell crops its image to fill */
+#portpreview .cell {
+  position: relative;
+  overflow: hidden;
+}
+#portpreview .cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Grain ON TOP of images in this panel */
+#portpreview .portpanel[data-noise] .noise-canvas {
+  inset: -1px 0 -1px 0;   /* tiny bleed to avoid seams */
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* CTA line under the panel */
+#portpreview .port-cta {
+  margin: 12px 10px 40px; /* small left/right echoing the panel padding */
+  color: var(--deepblack);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+  font-size: 0.95rem;
+}
+#portpreview .port-cta .arrow {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* Optional: stack to 1 column on smaller screens */
+@media (max-width: 900px) {
+  #portpreview .portpanel .grid {
+    grid-template-columns: 1fr;
+  }
+}
