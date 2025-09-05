@@ -318,6 +318,8 @@ h2 { margin: 0; }
 #portpreview .portpanel {
   background: #000;
   position: relative;   /* anchor for noise canvas */
+  display: flex;
+  flex-direction: column;
 }
 
 /* 2x2 grid with 10px padding and 10px gap */
