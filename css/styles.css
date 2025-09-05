@@ -309,7 +309,6 @@ figure { margin: 0; }
    position: relative;
    box-sizing: border-box;
    display: flex;
-   background-color: var(--closewhite);
    padding-top: 20vh; 
    height: 65vh;
 }
@@ -339,10 +338,8 @@ figure { margin: 0; }
   color: var(--deepblack);
   font-family: var(--font-title);
   font-weight: 700;
-  letter-spacing: -0.01em;
-  
+  letter-spacing: -0.01em;  
   line-height: 1;
-  background-color: var(--closewhite);
 }
 
 #portpreview .port-title h2 {
