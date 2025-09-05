@@ -7,7 +7,7 @@
     scale: 1,          // 1 = fine, higher = chunkier
     tile: 160,         // base tile size (CSS px before DPR & scale)
     layers: 1,         // blend N independently reseeded layers
-    monochrome: true,  // true = grayscale noise
+    monochrome: false,  // true = grayscale noise
     blend: "normal",   // "normal", "screen", "overlay", etc.
   };
 
