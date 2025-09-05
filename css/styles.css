@@ -194,7 +194,6 @@ figure { margin: 0; }
 #site-footer {
   background: var(--closewhite);
   color: var(--deepblack);
-  min-height: 35vh;
   display: grid;
   grid-template-rows: 1fr 4vh;
   border-top: 1px solid rgba(0,0,0,0.08);
