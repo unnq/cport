@@ -537,3 +537,29 @@ figure { margin: 0; }
   margin-top: 0.75rem;         /* tighter than port-cta so hero layout stays clean */
   color: var(--closewhite);    /* white on dark hero */
 }
+
+/* --- Put grain above animated content --- */
+/* Default: grain sits on top inside any [data-noise] host */
+[data-noise] .noise-canvas {
+  z-index: 50;           /* higher than any content with no z-index */
+  pointer-events: none;  /* still click-through */
+}
+
+/* Hero: force the grain above the title animation */
+#hero[data-noise] .noise-canvas { z-index: 60; }
+
+/* Keep hero content below the grain */
+#hero .hero-top,
+#hero h1,
+#hero .hero-cta {
+  position: relative;
+  z-index: 0;
+}
+
+/* Next: you already wanted grain above images — keep it explicit */
+#next[data-noise] .noise-canvas { z-index: 60; }
+
+/* Port preview: if you want the HUD (2025 / Scroll to explore / →) ABOVE grain,
+   keep it higher; if you want it under grain too, change 200 -> 0. */
+#portpreview .port-top .port-hud { z-index: 200; }
+#portpreview .port-top .noise-canvas { z-index: 60; }
