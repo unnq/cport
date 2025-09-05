@@ -535,6 +535,7 @@ figure { margin: 0; }
 /* Hero CTA placement and color */
 #hero .hero-cta {
   margin-top: 0.75rem;         /* tighter than port-cta so hero layout stays clean */
+  margin-left: 1em;
   color: var(--closewhite);    /* white on dark hero */
 }
 
