@@ -21,38 +21,35 @@ body {
   background: var(--deepblack);
   color: var(--closewhite);
   font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+main { flex: 1 0 auto; }
 
-h1 {
-  margin: 0;
-}
+h1 { margin: 0; }
 
 /* =========================
-   Navbar
+   Navbar (scoped)
    ========================= */
-nav {
+.site-nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 0; left: 0; right: 0;
   height: 4vh;
   display: flex;
   align-items: center;
   background: transparent;
   z-index: 10;
 }
-
-nav ul {
-  margin: 0;
-  padding: 0;
+.site-nav ul {
+  margin: 0; padding: 0;
   list-style: none;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
-nav a {
+.site-nav a {
   display: block;
   text-decoration: none;
   color: var(--closewhite);
@@ -60,14 +57,7 @@ nav a {
   padding: 0 1rem;
   line-height: 4vh;
 }
-nav a:hover {
-  color: var(--lightgray);
-}
-
-.site-nav { position: fixed; top: 0; /* …rest */ }
-.site-nav ul { /* … */ }
-.site-nav a  { /* … */ }
-
+.site-nav a:hover { color: var(--lightgray); }
 
 /* =========================
    Hero
@@ -81,13 +71,11 @@ nav a:hover {
   align-items: flex-start;
   padding-top: 4vh;  /* avoids overlap with navbar */
 }
-
 #hero .subtitle {
   margin: 0 0 0.25rem 0;
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
   color: var(--lightgray);
 }
-
 #hero h1 {
   margin: 0 0 -3.5vw -2vw;
   line-height: 0.95;
@@ -107,44 +95,24 @@ nav a:hover {
   place-items: center;
   padding: 2rem 0;
   background: var(--closewhite);
-  border-bottom: 1px solid (var--deepblack);
+  border-bottom: 1px solid var(--deepblack);
 }
-
-#next p {
-  margin: 0;
-  color: var(--deepblack);
-}
-
+#next p { margin: 0; color: var(--deepblack); }
 
 /* Halftone background host */
-[data-halftone] {
-  position: relative; /* anchor for canvas */
-  overflow: hidden;   /* keep canvas clipped */
-}
-
+[data-halftone] { position: relative; overflow: hidden; }
 [data-halftone] .halftone-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* let clicks pass through */
-  z-index: 0;           /* behind content */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
 }
 
 /* Noise background host */
-[data-noise] {
-  position: relative;      /* anchor for canvas */
-  overflow: hidden;        /* clip canvas to the host */
-}
-
-/* The overlay canvas */
+[data-noise] { position: relative; overflow: hidden; }
 [data-noise] .noise-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;    /* don't block clicks */
-  z-index: 0;              /* behind your content */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
 }
 
 /* =========================
@@ -157,6 +125,7 @@ nav a:hover {
   display: grid;
   grid-template-rows: 1fr 4vh; /* main + bottom bar */
   border-top: 1px solid rgba(0,0,0,0.08);
+  margin-top: auto; /* push down if page is short */
 }
 
 /* 5-column grid */
@@ -176,7 +145,6 @@ nav a:hover {
   justify-content: space-between;
   min-height: 20vh;
 }
-
 .footer-brand {
   margin: 0 0 8px 0;
   font-family: var(--font-title);
@@ -185,30 +153,21 @@ nav a:hover {
   font-weight: 700;
   color: var(--deepblack);
 }
-
-.footer-tag {
-  margin: 0;
-  max-width: 40ch;
-  line-height: 1.4;
-  color: #222; /* slightly darker for contrast on white */
-}
-
+.footer-tag { margin: 0; max-width: 40ch; line-height: 1.4; color: #222; }
 .footer-arrow {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 0; bottom: 0;
   font-size: clamp(20px, 2.2vw, 28px);
   line-height: 1;
 }
 
-/* Middle cluster (spans cols 3-4), with two vertical columns */
+/* Middle cluster (cols 3-4) */
 .footer-nav-social {
   grid-column: 3 / span 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(12px, 2vw, 24px);
 }
-
 .footer-h {
   margin: 0 0 10px 0;
   font-size: 0.9rem;
@@ -217,22 +176,14 @@ nav a:hover {
   letter-spacing: 0.06em;
   color: #111;
 }
-
 .footer-col ul {
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
-.footer-col a {
-  color: var(--deepblack);
-  text-decoration: none;
-  font-weight: 500;
-}
-
+.footer-col a { color: var(--deepblack); text-decoration: none; font-weight: 500; }
 .footer-col a:hover { opacity: 0.7; }
 
 /* Right single column (col 5) */
@@ -255,7 +206,6 @@ nav a:hover {
   align-items: center;
   height: 4vh;
 }
-
 .footer-bottom-inner {
   width: 100%;
   padding: 0 clamp(16px, 3vw, 28px);
@@ -263,37 +213,13 @@ nav a:hover {
   justify-content: space-between;
   align-items: center;
 }
+.footer-bottom-text { font-size: 0.85rem; color: #222; }
 
-.footer-bottom-text {
-  font-size: 0.85rem;
-  color: #222;
-}
-
-/* Responsive: stack gracefully on small screens */
+/* Responsive */
 @media (max-width: 900px) {
-  #site-footer .footer-main {
-    grid-template-columns: 1fr;
-  }
-  .footer-left {
-    grid-column: 1;
-    min-height: auto;
-    padding-bottom: 24px;
-  }
-  .footer-arrow {
-    position: static;
-    align-self: flex-end;
-    margin-top: 16px;
-  }
-  .footer-nav-social {
-    grid-column: 1;
-    grid-template-columns: 1fr 1fr;
-  }
-  .footer-logo-slot {
-    grid-column: 1;
-    margin-top: 16px;
-    min-height: 80px;
-  }
+  #site-footer .footer-main { grid-template-columns: 1fr; }
+  .footer-left { grid-column: 1; min-height: auto; padding-bottom: 24px; }
+  .footer-arrow { position: static; align-self: flex-end; margin-top: 16px; }
+  .footer-nav-social { grid-column: 1; grid-template-columns: 1fr 1fr; }
+  .footer-logo-slot { grid-column: 1; margin-top: 16px; min-height: 80px; }
 }
-
-/* Make footer links readable on white even if global link color changes */
-#site-footer a { color: var(--deepblack); }
