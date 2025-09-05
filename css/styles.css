@@ -2,11 +2,10 @@
    Design Tokens
    ========================= */
 :root {
-  --deepblack: #0a0a0a;   /* near-black background */
-  --closewhite: #fcfcfc;  /* slightly off-white */
-  --lightgray: #f2f1f0;   /* subtle light gray accent */
+  --deepblack: #0a0a0a;
+  --closewhite: #fcfcfc;
+  --lightgray: #f2f1f0;
 
-  /* Fonts */
   --font-body: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --font-title: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
@@ -60,34 +59,37 @@ h1 { margin: 0; }
 .site-nav a:hover { color: var(--lightgray); }
 
 /* =========================
-   Hero (85vh; top 75% content, bottom 25% white)
+   Hero (100vh desktop, 86vh mobile)
+   Grid: top 75% content, bottom 25% white strip
    ========================= */
 #hero {
-  min-height: 85vh;               /* requested height */
+  height: 100vh;                 /* desktop */
   position: relative;
   display: grid;
-  grid-template-rows: 3fr 1fr;    /* 75% / 25% split */
-  overflow: hidden;               /* clip noise canvas to hero */
-  padding-top: 4vh;               /* avoid overlap with fixed nav */
+  grid-template-rows: 3fr 1fr;   /* 75% / 25% split */
+  overflow: hidden;              /* clip noise to hero */
+  padding-top: 4vh;              /* clear fixed nav */
+  box-sizing: border-box;        /* include padding in 100vh */
 }
 
-/* Top area containing subtitle + title (sits in the first grid row) */
+@media (max-width: 768px) {
+  #hero { height: 86vh; }        /* mobile */
+}
+
 .hero-top {
   grid-row: 1;
-  align-self: end;                 /* anchor text to bottom of top area */
+  align-self: end;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-
 #hero .subtitle {
   margin: 0 0 0.25rem 0;
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
   color: var(--lightgray);
 }
-
 #hero h1 {
-  margin: 0 0 -3.5vw -2vw;        /* your intentional overlap */
+  margin: 0 0 -3.5vw -2vw;       /* intentional overlap into white strip */
   line-height: 0.95;
   letter-spacing: -0.02em;
   font-weight: 600;
@@ -96,7 +98,7 @@ h1 { margin: 0; }
   font-family: var(--font-title);
 }
 
-/* Bottom 25% white strip INSIDE the hero */
+/* bottom white strip inside hero */
 .hero-strip {
   grid-row: 2;
   background: var(--closewhite);
@@ -116,26 +118,22 @@ h1 { margin: 0; }
 #next p { margin: 0; color: var(--deepblack); }
 
 /* =========================
-   Halftone / Noise hosts
-   (do NOT hide overflow on BODY)
+   Halftone / Noise hosts (not on BODY)
    ========================= */
 :not(body)[data-halftone],
 :not(body)[data-noise] {
   position: relative;
-  overflow: hidden;          /* confine effects to the host */
+  overflow: hidden;
 }
-
-/* canvases */
 .halftone-canvas,
 .noise-canvas {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
   pointer-events: none;
-  z-index: 0;                /* behind content like .hero-strip */
+  z-index: 0;
 }
-
-/* tiny bleed to avoid hairline seams between sections */
+/* small bleed to avoid hairline seams */
 [data-noise] .noise-canvas { inset: -1px 0 -1px 0; }
 
 /* =========================
@@ -146,9 +144,9 @@ h1 { margin: 0; }
   color: var(--deepblack);
   min-height: 35vh;
   display: grid;
-  grid-template-rows: 1fr 4vh; /* main + bottom bar */
+  grid-template-rows: 1fr 4vh;
   border-top: 1px solid rgba(0,0,0,0.08);
-  margin-top: auto;            /* pushes footer to bottom on short pages */
+  margin-top: auto;
 }
 
 /* 5-column grid */
@@ -159,7 +157,7 @@ h1 { margin: 0; }
   padding: clamp(24px, 4vw, 56px);
 }
 
-/* Left cluster (spans cols 1-2) */
+/* Left (cols 1-2) */
 .footer-left {
   grid-column: 1 / span 2;
   position: relative;
@@ -184,7 +182,7 @@ h1 { margin: 0; }
   line-height: 1;
 }
 
-/* Middle cluster (cols 3-4) */
+/* Middle (cols 3-4) */
 .footer-nav-social {
   grid-column: 3 / span 2;
   display: grid;
@@ -209,7 +207,7 @@ h1 { margin: 0; }
 .footer-col a { color: var(--deepblack); text-decoration: none; font-weight: 500; }
 .footer-col a:hover { opacity: 0.7; }
 
-/* Right single column (col 5) */
+/* Right (col 5) */
 .footer-logo-slot {
   grid-column: 5 / span 1;
   display: grid;
@@ -238,7 +236,7 @@ h1 { margin: 0; }
 }
 .footer-bottom-text { font-size: 0.85rem; color: #222; }
 
-/* Responsive */
+/* Responsive footer stacking */
 @media (max-width: 900px) {
   #site-footer .footer-main { grid-template-columns: 1fr; }
   .footer-left { grid-column: 1; min-height: auto; padding-bottom: 24px; }
