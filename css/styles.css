@@ -138,6 +138,7 @@ figure { margin: 0; }
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 2.2vw, 32px);
   align-items: start;
+  margin: auto 3vw auto 0;
 }
 
 /* column blocks */
@@ -167,7 +168,6 @@ figure { margin: 0; }
 /* mobile stacking */
 @media (max-width: 900px){
   .collections-grid{
-    grid-template-columns: 1fr;
     gap: clamp(12px, 3vw, 18px);
   }
 }
