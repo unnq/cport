@@ -4,7 +4,7 @@
     dpr: 2,            // render scale
     fps: 16,           // cap the refresh rate
     opacity: 0.06,     // overall strength (0..1)
-    scale: 1,          // 1 = fine, higher = chunkier
+    scale: 2,          // 1 = fine, higher = chunkier
     tile: 160,         // base tile size (CSS px before DPR & scale)
     layers: 1,         // blend N independently reseeded layers
     monochrome: false,  // true = grayscale noise
