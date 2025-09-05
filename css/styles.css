@@ -327,7 +327,7 @@ figure { margin: 0; }
    font-family: var(--font-title);
    font-weight: 700;
    letter-spacing: -0.01em;
-   font-size: clamp(3rem, 8vw, 12rem);
+   font-size: clamp(2.2rem, 7vw, 12rem);
 }
 
 /* Black panel that hosts the grid and the grain */
