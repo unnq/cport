@@ -109,7 +109,7 @@ h1 { margin: 0; }
    Next Section: 3-up gallery, no gaps
    ========================= */
 #next {
-  height: 60vh;                          /* one row, full viewport feel */
+  height: 100vh;                          /* one row, full viewport feel */
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 even columns */
   gap: 0;                                 /* no gutters */
