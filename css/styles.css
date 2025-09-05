@@ -101,6 +101,7 @@ figure { margin: 0; }
   font-size: clamp(6rem, 23.5vw, 32rem);
   color: var(--closewhite);
   font-family: var(--font-title);
+  pointer-events: none;
 }
 
 /* --- Hero strip: content layout --- */
