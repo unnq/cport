@@ -133,7 +133,26 @@ h1 { margin: 0; }
   height: 100%;
   object-fit: cover;                      /* crop to fill */
   display: block;
+  z-index: 1;
 }
+
+/* Keep your tiny seam bleed */
+#next[data-noise] .noise-canvas { 
+  inset: -1px 0 -1px 0; 
+  z-index: 3;            /* ABOVE the images */
+  pointer-events: none;  /* clicks go to images/links */
+}
+
+/* Make sure images sit below the grain */
+#next .next-col { position: relative; }
+#next .next-col img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 1;            /* BELOW the grain */
+}
+
 
 /* keep the tiny bleed so no hairline seams */
 #next[data-noise] .noise-canvas { inset: -1px 0 -1px 0; }
