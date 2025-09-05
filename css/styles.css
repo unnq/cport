@@ -108,6 +108,7 @@ h1 { margin: 0; }
 :not(body)[data-noise] {
   position: relative;
   overflow: hidden;   /* clips effect within that section only */
+  height: 100%;
 }
 
 /* canvases */
