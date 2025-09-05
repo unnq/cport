@@ -460,13 +460,11 @@ figure { margin: 0; }
 /* CTA line under the panel */
 #portpreview .port-cta {
   margin: 12vh auto 12vh auto;
-  border-bottom: 1px dashed;
   color: var(--closewhite);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5ch;
-  line-height: .5em;
+  display: block;
+  text-align: left;
 }
+
 #portpreview .port-cta .arrow {
   font-size: 1.1em;
   line-height: 1;
@@ -519,4 +517,23 @@ figure { margin: 0; }
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+
+/* Shared CTA look used in hero + portpreview */
+.cta-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+  border-bottom: 1px dashed currentColor; /* same look as port-cta */
+  text-decoration: none;
+  color: inherit; /* inherit from parent */
+  line-height: 1.1;
+}
+.cta-line .arrow { font-size: 1.1em; line-height: 1; }
+
+/* Hero CTA placement and color */
+#hero .hero-cta {
+  margin-top: 0.75rem;         /* tighter than port-cta so hero layout stays clean */
+  color: var(--closewhite);    /* white on dark hero */
 }
