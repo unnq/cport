@@ -297,7 +297,7 @@ h1 { margin: 0; }
    Port Preview
    ========================= */
 #portpreview {
-  background: var(--closewhite);
+  background-color: var(--closewhite);
 }
 
 /* Title with top space + your negative offsets */
@@ -309,6 +309,7 @@ h1 { margin: 0; }
   letter-spacing: -0.01em;
   font-size: clamp(1.6rem, 3.5vw, 3rem);
   line-height: 1;
+  background-color: var(--closewhite);
 }
 
 /* Black panel that hosts the grid and the grain */
