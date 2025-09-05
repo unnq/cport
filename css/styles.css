@@ -155,7 +155,7 @@ h1 { margin: 0; }
 
 
 /* keep the tiny bleed so no hairline seams */
-#next[data-noise] .noise-canvas { inset: -1px 0 -1px 0; }
+#next[data-noise] .noise-canvas { inset: 0px 0 -1px 0; }
 
 /* Optional: stack on mobile, still edge-to-edge */
 @media (max-width: 900px) {
