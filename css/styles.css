@@ -324,7 +324,7 @@ figure { margin: 0; }
 
 /* Black panel that hosts the grid and the grain */
 #portpreview .portpanel {
-  background: #000;
+  background: var(--deepblack);
   position: relative;   /* anchor for noise canvas */
   display: flex;
   flex-direction: column;
