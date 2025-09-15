@@ -55,11 +55,10 @@ figure { margin: 0; }
 
 /* 3-zone grid ensures the center stays truly centered */
 .nav-grid {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 1.25rem;
-  min-width: 540px;           /* optional: keeps a nice pill width */
+  width: 60vw;           /* optional: keeps a nice pill width */
 }
 
 /* Left menu */
