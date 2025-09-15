@@ -33,34 +33,48 @@ h2 { margin: 0; }
 figure { margin: 0; }
 
 /* =========================
-   Navbar (scoped)
+   Floating Glass Navbar
    ========================= */
 .site-nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 4vh;
+  top: 2vh;                /* pull it down a bit */
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;      /* shrink to fit contents */
+  padding: 0.5rem 1.25rem; /* breathing room */
+  
   display: flex;
   align-items: center;
-  background: transparent;
-  z-index: 10;
+  
+  background: rgba(46, 34, 26, 0.08); /* faint tint */
+  backdrop-filter: blur(12px) saturate(160%) brightness(110%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(110%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  
+  z-index: 50;
 }
+
 .site-nav ul {
   margin: 0; padding: 0;
   list-style: none;
-  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 1.5rem; /* spacing between links */
 }
+
 .site-nav a {
   display: block;
   text-decoration: none;
   color: var(--closewhite);
   font-weight: 500;
-  padding: 0 1rem;
-  line-height: 4vh;
+  font-family: "Geist Mono", monospace; /* <- font here */
+  padding: 0.25rem 0;
 }
+
 .site-nav a:hover { color: var(--lightgray); }
+
 
 /* =========================
    Hero (100vh desktop, 90vh mobile)
