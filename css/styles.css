@@ -49,7 +49,6 @@ figure { margin: 0; }
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 1.8rem;
   box-shadow: 0 6px 22px rgba(0,0,0,0.28);
-
   padding: 0.5rem 0.875rem;   /* outer padding for the pill */
 }
 
