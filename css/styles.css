@@ -154,6 +154,54 @@ figure { margin: 0; }
   border-radius: 24px;
 }
 
+/* Each row: fixed height, no inner spacing */
+.marquee-row {
+  --row-h: clamp(56px, 12vw, 120px);
+  height: var(--row-h);
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* The moving track (JS translates this) */
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 56px); /* space between items */
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* A logical grouping we clone for seamless loop */
+.marquee-group {
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+}
+
+/* Items (either <img> SVGs or inline <svg>) */
+.marquee-item img,
+.marquee-item svg {
+  height: calc(var(--row-h) * 0.7); /* scale visuals relative to row height */
+  width: auto;
+  display: block;
+}
+
+/* Fallback text shown until SVGs are provided */
+.marquee-fallback {
+  font-family: "Geist Mono", monospace;
+  color: var(--closewhite, #fcfcfc);
+  opacity: 0.6;
+  white-space: nowrap;
+  padding: 0 1rem;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { transform: none !important; }
+}
+
 #hero .subtitle {
   margin: 0 0 0.25rem 0;
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
