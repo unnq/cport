@@ -37,43 +37,94 @@ figure { margin: 0; }
    ========================= */
 .site-nav {
   position: fixed;
-  top: 2vh;                /* pull it down a bit */
+  top: 2vh;
   left: 50%;
   transform: translateX(-50%);
-  width: fit-content;      /* shrink to fit contents */
-  padding: 0.5rem 1.25rem; /* breathing room */
-  
-  display: flex;
-  align-items: center;
-  
-  background: rgba(46, 34, 26, 0.08); /* faint tint */
+  z-index: 50;
+
+  /* Glass pill container */
+  background: rgba(46, 34, 26, 0.08);
   backdrop-filter: blur(12px) saturate(160%) brightness(110%);
   -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(110%);
-  
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 1.5rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  
-  z-index: 50;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.28);
+
+  padding: 0.5rem 0.875rem;   /* outer padding for the pill */
 }
 
-.site-nav ul {
-  margin: 0; padding: 0;
-  list-style: none;
+/* 3-zone grid ensures the center stays truly centered */
+.nav-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 540px;           /* optional: keeps a nice pill width */
+}
+
+/* Left menu */
+.nav-left {
   display: flex;
-  gap: 1.5rem; /* spacing between links */
+  gap: 1rem;
+  justify-self: start;
 }
 
-.site-nav a {
-  display: block;
+.nav-left a {
   text-decoration: none;
-  color: var(--closewhite);
-  font-weight: 500;
-  font-family: "Geist Mono", monospace; /* <- font here */
-  padding: 0.25rem 0;
+  color: var(--closewhite, #fcfcfc);
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.5rem 0.25rem;       /* bigger tap target */
+  font-family: "Geist Mono", monospace;
+}
+.nav-left a:hover { color: var(--lightgray, #f2f1f0); }
+
+/* Center logo */
+.nav-center {
+  justify-self: center;
+}
+.nav-logo {
+  height: 24px;                  /* adjust as needed */
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0 transparent); /* crisp */
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-.site-nav a:hover { color: var(--lightgray); }
+/* Right icons */
+.nav-right {
+  display: flex;
+  gap: 0.75rem;
+  justify-self: end;
+}
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  color: var(--closewhite, #fcfcfc);
+  transition: transform 120ms ease, background-color 120ms ease, color 120ms ease;
+}
+.icon-link:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--lightgray, #f2f1f0);
+  transform: translateY(-1px);
+}
+
+/* Optional: small screens */
+@media (max-width: 640px) {
+  .nav-grid { 
+    min-width: 0; 
+    gap: 0.75rem;
+  }
+  .nav-left a { font-weight: 500; }
+  .nav-logo { height: 20px; }
+}
+
 
 
 /* =========================
