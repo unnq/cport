@@ -1,29 +1,31 @@
 /* heromarquee.js
-   - Builds 3 marquee rows from arrays of SVG paths.
-   - Alternating directions (left/right) per row.
-   - Seamless loop via duplicated groups.
-   - Graceful fallback text when arrays are empty.
+   - Infinite marquee with seamless looping.
+   - Each row fills 1/3 of .hero-top via flex.
+   - SVGs optional; large fallback text shown if arrays empty.
 */
 
 (() => {
   const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // === 1) Provide your SVG filenames here when ready ===
-  // Example: ['assets/svg/logo1.svg','assets/svg/logo2.svg', ...]
+  // 1) Put your SVG file paths here when ready:
+  // e.g., ['assets/svg/lockup.svg','assets/svg/mark.svg', ...]
   const ROW_SVGS = {
-    marq1: [], // row 1 paths
-    marq2: [], // row 2 paths
-    marq3: []  // row 3 paths
+    marq1: [], // top row
+    marq2: [], // middle row
+    marq3: []  // bottom row
   };
 
-  const FALLBACK = {
-    marq1: 'Row 1 — add SVGs (update ROW_SVGS.marq1)',
-    marq2: 'Row 2 — add SVGs (update ROW_SVGS.marq2)',
-    marq3: 'Row 3 — add SVGs (update ROW_SVGS.marq3)'
+  // 2) Fallback text (repeated to form a loop)
+  const FALLBACK_TEXT = {
+    marq1: ['CUTLASS', 'GRAPHIC DESIGN', 'TYPE', 'LAYOUTS'],
+    marq2: ['BRANDING', 'POSTERS', 'ALBUM ART', 'EXPERIMENTAL'],
+    marq3: ['3D RENDERS', 'MATERIALS', 'ENVIRONMENTS', 'CONCEPTS']
   };
 
-  // === 2) Utilities ===
-  function makeItem(src) {
+  // --- helpers ---
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  function makeImageItem(src) {
     const wrap = document.createElement('div');
     wrap.className = 'marquee-item';
     const img = document.createElement('img');
@@ -35,60 +37,68 @@
     return wrap;
   }
 
-  function makeGroup(items) {
-    const group = document.createElement('div');
-    group.className = 'marquee-group';
-    items.forEach(el => group.appendChild(el));
-    return group;
+  function makeTextItem(txt) {
+    const span = document.createElement('span');
+    span.className = 'marquee-fallback';
+    span.textContent = txt;
+    return span;
   }
 
-  function loadAllImages(root) {
-    const imgs = Array.from(root.querySelectorAll('img'));
+  function makeGroup(nodes) {
+    const g = document.createElement('div');
+    g.className = 'marquee-group';
+    nodes.forEach(n => g.appendChild(n));
+    return g;
+  }
+
+  function loadImages(root) {
+    const imgs = $$('img', root);
     return Promise.allSettled(
       imgs.map(img => (img.decode ? img.decode().catch(() => {}) : Promise.resolve()))
     );
   }
 
-  // Build a row: insert two identical groups for looping
-  async function buildRow(trackEl, sources, fallbackText) {
+  // Build one row: create two identical groups for seamless loop
+  async function buildRow(trackEl, sources, fallbackTexts) {
     trackEl.innerHTML = '';
 
-    if (!sources || sources.length === 0) {
-      const fb = document.createElement('span');
-      fb.className = 'marquee-fallback';
-      fb.textContent = fallbackText || 'Add SVGs here';
-      trackEl.appendChild(fb);
-      return { groupWidth: 0 };
+    let nodes;
+    if (sources && sources.length) {
+      nodes = sources.map(makeImageItem);
+    } else {
+      // repeat fallback text to ensure enough width for looping
+      const repeats = 4; // adjust if you want denser line
+      nodes = Array.from({ length: repeats })
+        .flatMap(() => fallbackTexts.map(makeTextItem));
     }
 
-    const items = sources.map(makeItem);
-    const groupA = makeGroup(items);
+    const groupA = makeGroup(nodes);
     const groupB = groupA.cloneNode(true);
     groupB.setAttribute('aria-hidden', 'true');
 
     trackEl.appendChild(groupA);
     trackEl.appendChild(groupB);
 
-    // Wait for images to layout so we can measure widths
-    await loadAllImages(trackEl);
+    await loadImages(trackEl);
 
-    const groupWidth = groupA.getBoundingClientRect().width;
-    return { groupWidth, groupA, groupB };
+    // Width after layout (we need this for wrapping logic)
+    const w = groupA.getBoundingClientRect().width;
+    return { groupWidth: w };
   }
 
-  // Animate a single row
-  function animateRow(rowEl, trackEl, groupWidth, direction, speed) {
+  // Animate one row with rAF
+  function animateRow(trackEl, groupWidth, direction, speed) {
     if (prefersReduced || !groupWidth) return () => {};
 
-    // px/s -> px/ms
-    const vel = (Number(speed) || 70) / 1000;
+    // speed = px/s → px/ms
+    const vel = (Number(speed) || 80) / 1000;
     const dir = direction === 'right' ? 1 : -1;
 
-    // For rightward motion, start at -groupWidth so it slides in
+    // For right-moving, start offset at -groupWidth so it slides in from left
     let offset = dir === 1 ? -groupWidth : 0;
     let last = performance.now();
-
     let rafId = 0;
+
     const tick = (now) => {
       const dt = now - last;
       last = now;
@@ -96,10 +106,10 @@
       offset += dir * vel * dt;
 
       if (dir === -1) {
-        // moving left: wrap when fully shifted left by groupWidth
+        // moving left: wrap when scrolled past groupWidth
         if (Math.abs(offset) >= groupWidth) offset += groupWidth;
       } else {
-        // moving right: wrap when we reach 0 from -groupWidth
+        // moving right: wrap when offset reaches 0 from -groupWidth
         if (offset >= 0) offset -= groupWidth;
       }
 
@@ -111,44 +121,42 @@
     return () => cancelAnimationFrame(rafId);
   }
 
-  // Rebuild and (re)start a row (useful on resize)
   async function setupRow(trackId) {
     const trackEl = document.getElementById(trackId);
     if (!trackEl) return () => {};
 
     const rowEl = trackEl.closest('.marquee-row');
-    const dir = rowEl?.dataset?.direction || 'left';
-    const speed = rowEl?.dataset?.speed || '70';
+    const direction = rowEl?.dataset?.direction || 'left';
+    const speed = rowEl?.dataset?.speed || '80';
 
-    const { groupWidth } = await buildRow(trackEl, ROW_SVGS[trackId] || [], FALLBACK[trackId]);
-    return animateRow(rowEl, trackEl, groupWidth, dir, speed);
+    const { groupWidth } = await buildRow(
+      trackEl,
+      ROW_SVGS[trackId],
+      FALLBACK_TEXT[trackId] || ['ADD', 'SVG', 'FILES']
+    );
+
+    return animateRow(trackEl, groupWidth, direction, speed);
   }
 
-  // === 3) Init all rows ===
   const destroyers = [];
-  function init() {
-    destroyers.splice(0).forEach(fn => fn()); // clean any existing rafs
+  function initAll() {
+    // stop any previous animations before rebuilding
+    while (destroyers.length) (destroyers.pop())?.();
 
-    Promise.all([
-      setupRow('marq1'),
-      setupRow('marq2'),
-      setupRow('marq3')
-    ]).then(stoppers => {
-      stoppers.forEach(stop => destroyers.push(stop));
-    });
+    Promise.all([setupRow('marq1'), setupRow('marq2'), setupRow('marq3')])
+      .then(stoppers => stoppers.forEach(stop => destroyers.push(stop)));
   }
 
-  // Initialize on DOM ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', initAll);
   } else {
-    init();
+    initAll();
   }
 
-  // Reflow on resize (debounced)
+  // Rebuild on resize (debounced)
   let rAF = 0;
   window.addEventListener('resize', () => {
     cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(() => init());
+    rAF = requestAnimationFrame(initAll);
   });
 })();
