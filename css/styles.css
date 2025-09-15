@@ -131,7 +131,7 @@ figure { margin: 0; }
    Grid: top 75% content, bottom 25% white strip
    ========================= */
 #hero {
-  height: 100vh;                 /* desktop */
+  height: 96vh;                 /* desktop */
   position: relative;
   display: grid;
   grid-template-rows: 3fr 1fr;   /* 75% / 25% split */
@@ -153,6 +153,7 @@ figure { margin: 0; }
   background-color: blue;
   margin: 6vh 6vw 0 6vw;
   border-radius: 24px;
+  height: 86vh;
 }
 
 #hero .subtitle {
