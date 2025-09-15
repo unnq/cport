@@ -134,7 +134,6 @@ figure { margin: 0; }
   height: 96vh;                 /* desktop */
   position: relative;
   display: grid;
-  grid-template-rows: 3fr 1fr;   /* 75% / 25% split */
   overflow: hidden;              /* clip noise to hero */
   padding-top: 4vh;              /* clear fixed nav */
   box-sizing: border-box;        /* include padding in 100vh */
