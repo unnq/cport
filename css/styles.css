@@ -191,6 +191,8 @@ figure { margin: 0; }
 /* Fallback text shown until SVGs are provided */
 .marquee-fallback {
   font-family: "Geist Mono", monospace;
+  font-weight: 700;
+  font-size: clamp(20px, 4vw, 64px);
   color: var(--closewhite, #fcfcfc);
   opacity: 0.6;
   white-space: nowrap;
