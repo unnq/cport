@@ -187,6 +187,7 @@ figure { margin: 0; }
   max-height: 70%; /* scale visuals relative to row height */
   width: auto;
   display: block;
+  color: var(--deepblack);
 }
 
 /* Fallback text shown until SVGs are provided */
