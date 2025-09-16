@@ -198,10 +198,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 /* Items (either <img> SVGs or inline <svg>) */
 .marquee-item img,
 .marquee-item svg {
-  width: auto;
-  object-fit: contain;
   height: 80vh;
-  display: block;
   color: var(--deepblack);
   filter: none !important;
 }
