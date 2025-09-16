@@ -23,7 +23,8 @@ const ROW_SVGS = {
     'assets/svg/rebel.svg',
     'assets/svg/silvia.svg',
     'assets/svg/traphaus.svg'
-  ], // top row
+  ], // top row (original order)
+
   marq2: [
     'assets/svg/aeg.svg',
     'assets/svg/bjork.svg',
@@ -38,23 +39,25 @@ const ROW_SVGS = {
     'assets/svg/rebel.svg',
     'assets/svg/silvia.svg',
     'assets/svg/traphaus.svg'
-  ], // middle row
+  ], // middle row (original order)
+
   marq3: [
-    'assets/svg/aeg.svg',
-    'assets/svg/bjork.svg',
-    'assets/svg/cutla.svg',
-    'assets/svg/cutla2.svg',
-    'assets/svg/doron.svg',
-    'assets/svg/ecco.svg',
-    'assets/svg/golden eye.svg',
-    'assets/svg/hga.svg',
-    'assets/svg/kyoto.svg',
-    'assets/svg/nike.svg',
     'assets/svg/rebel.svg',
+    'assets/svg/ecco.svg',
+    'assets/svg/nike.svg',
+    'assets/svg/cutla2.svg',
+    'assets/svg/bjork.svg',
+    'assets/svg/hga.svg',
+    'assets/svg/aeg.svg',
     'assets/svg/silvia.svg',
-    'assets/svg/traphaus.svg'
-  ]  // bottom row
+    'assets/svg/doron.svg',
+    'assets/svg/traphaus.svg',
+    'assets/svg/kyoto.svg',
+    'assets/svg/golden eye.svg',
+    'assets/svg/cutla.svg'
+  ]  // bottom row (mixed order)
 };
+
 
 
   // 2) Fallback text (repeated to form a loop)
