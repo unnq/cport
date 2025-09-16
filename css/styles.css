@@ -211,6 +211,8 @@ figure { margin: 0; }
 /* Title overlay */
 .hero-title {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
