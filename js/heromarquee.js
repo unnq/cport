@@ -12,6 +12,7 @@ const ROW_SVGS = {
   marq1: [
     'assets/svg/aeg.svg',
     'assets/svg/bjork.svg',
+    'assets/svg/Asset15.svg',
     'assets/svg/cutla.svg',
     'assets/svg/cutla2.svg',
     'assets/svg/doron.svg',
