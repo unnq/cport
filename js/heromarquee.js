@@ -35,6 +35,22 @@
     return wrap;
   }
 
+ // Add this once (injects the keyframes so you don't have to edit CSS)
+function ensureMarqueeCSS() {
+  if (document.getElementById('marquee-anim-css')) return;
+  const style = document.createElement('style');
+  style.id = 'marquee-anim-css';
+  style.textContent = `
+    @keyframes marq {
+      from { transform: translate3d(0,0,0); }
+      to   { transform: translate3d(var(--marq-shift, -1000px), 0, 0); }
+    }
+    /* keep it on the compositor */
+    .marquee-track { will-change: transform; backface-visibility: hidden; }
+  `;
+  document.head.appendChild(style);
+}
+
   async function makeInlineSvgItem(src) {
     const wrap = document.createElement('div');
     wrap.className = 'marquee-item';
