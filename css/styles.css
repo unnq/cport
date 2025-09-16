@@ -208,6 +208,20 @@ figure { margin: 0; }
   .marquee-track { transform: none !important; }
 }
 
+/* Title overlay */
+.hero-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;                 /* above marquees */
+  font: 700 clamp(2rem, 8vw, 6rem)/1.1 var(--font-title, system-ui);
+  color: var(--closewhite, #fcfcfc);
+  text-align: center;
+  pointer-events: none;        /* lets clicks scroll marquee items below */
+  mix-blend-mode: difference;  /* optional: makes it cut through backgrounds */
+}
+
 #hero .subtitle {
   margin: 0 0 0.25rem 0;
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
