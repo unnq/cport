@@ -10,52 +10,15 @@
   // 1) Put your SVG file paths here when ready:
   const ROW_SVGS = {
     marq1: [
-      'assets/svg/aeg.svg',
-      'assets/svg/bjork.svg',
-      'assets/svg/Asset15.svg',
-      'assets/svg/cutla.svg',
-      'assets/svg/cutla2.svg',
-      'assets/svg/doron.svg',
-      'assets/svg/ecco.svg',
-      'assets/svg/golden eye.svg',
-      'assets/svg/hga.svg',
-      'assets/svg/kyoto.svg',
-      'assets/svg/nike.svg',
-      'assets/svg/rebel.svg',
-      'assets/svg/silvia.svg',
-      'assets/svg/traphaus.svg'
+      'assets/svg/MARQUEE-1.svg'
     ], // top row
 
     marq2: [
-      'assets/svg/aeg.svg',
-      'assets/svg/bjork.svg',
-      'assets/svg/cutla.svg',
-      'assets/svg/cutla2.svg',
-      'assets/svg/doron.svg',
-      'assets/svg/ecco.svg',
-      'assets/svg/golden eye.svg',
-      'assets/svg/hga.svg',
-      'assets/svg/kyoto.svg',
-      'assets/svg/nike.svg',
-      'assets/svg/rebel.svg',
-      'assets/svg/silvia.svg',
-      'assets/svg/traphaus.svg'
+      'assets/svg/MARQUEE-2.svg'
     ], // middle row
 
     marq3: [
-      'assets/svg/rebel.svg',
-      'assets/svg/ecco.svg',
-      'assets/svg/nike.svg',
-      'assets/svg/cutla2.svg',
-      'assets/svg/bjork.svg',
-      'assets/svg/hga.svg',
-      'assets/svg/aeg.svg',
-      'assets/svg/silvia.svg',
-      'assets/svg/doron.svg',
-      'assets/svg/traphaus.svg',
-      'assets/svg/kyoto.svg',
-      'assets/svg/golden eye.svg',
-      'assets/svg/cutla.svg'
+      'assets/svg/MARQUEE-1.svg'
     ]  // bottom row (mixed order)
   };
 
