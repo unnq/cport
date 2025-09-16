@@ -179,6 +179,12 @@ figure { margin: 0; }
   pointer-events: none;
   opacity: 0; transition: opacity 180ms ease;
 }
+
+.marquee-track:not(.glow) .marquee-item svg,
+.marquee-track:not(.glow) .marquee-item svg * {
+  filter: none !important;
+}
+
 body.scrolling .marquee-track.glow { opacity: 1; }
 
 /* A logical grouping we clone for seamless loop */
