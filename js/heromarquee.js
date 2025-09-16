@@ -143,34 +143,28 @@ function ensureMarqueeCSS() {
     return { groupWidth: finalW };
   }
 
-  // Animate one row with rAF (wrap every groupWidth px)
-  function animateRow(trackEl, groupWidth, direction, speed) {
-    if (prefersReduced || !groupWidth) return () => {};
-    const vel = (Number(speed) || 80) / 1000; // px/ms
-    const dir = direction === 'right' ? 1 : -1;
-
-    let offset = dir === 1 ? -groupWidth : 0;
-    let last = performance.now();
-    let rafId = 0;
-
-    const tick = (now) => {
-      const dt = now - last;
-      last = now;
-      offset += dir * vel * dt;
-
-      if (dir === -1) {
-        if (Math.abs(offset) >= groupWidth) offset += groupWidth; // leftward wrap
-      } else {
-        if (offset >= 0) offset -= groupWidth; // rightward wrap
-      }
-
-      trackEl.style.transform = `translate3d(${offset}px,0,0)`;
-      rafId = requestAnimationFrame(tick);
-    };
-
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }
+  // Replace your animateRow with this CSS-animated version
+   function animateRow(trackEl, groupWidth, direction, speed) {
+     ensureMarqueeCSS();
+   
+     // how far one cycle travels (px) and how long it takes (s)
+     const shift = (direction === 'right' ? groupWidth : -groupWidth);
+     const pxPerSec = Number(speed) || 80;
+     const dur = Math.abs(groupWidth / pxPerSec); // seconds
+   
+     trackEl.style.setProperty('--marq-shift', `${shift}px`);
+     trackEl.style.setProperty('--marq-dur', `${dur}s`);
+   
+     // Kick off CSS animation (doesn't pause during scroll)
+     trackEl.style.animation = `marq var(--marq-dur) linear infinite`;
+   
+     // Return a stopper that clears inline props
+     return () => {
+       trackEl.style.animation = '';
+       trackEl.style.removeProperty('--marq-shift');
+       trackEl.style.removeProperty('--marq-dur');
+     };
+   }
 
   async function setupRow(trackId) {
     const trackEl = document.getElementById(trackId);
