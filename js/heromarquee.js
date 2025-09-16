@@ -173,11 +173,16 @@
   }
 
   const destroyers = [];
-  function initAll() {
-    while (destroyers.length) (destroyers.pop())?.();
-    Promise.all([setupRow('marq1'), setupRow('marq2'), setupRow('marq3')])
-      .then(stoppers => stoppers.forEach(stop => destroyers.push(stop)));
-  }
+  // also build/animate the overlay track
+   function initAll() {
+     while (destroyers.length) (destroyers.pop())?.();
+     Promise.all([
+       setupRow('marq1'),
+       setupRow('marq1-glow'),   // ← add this
+       setupRow('marq2'),
+       setupRow('marq3')
+     ]).then(stoppers => stoppers.forEach(stop => destroyers.push(stop)));
+   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAll);
