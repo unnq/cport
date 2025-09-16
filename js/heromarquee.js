@@ -9,7 +9,7 @@
 
   // Use one wide "unit" SVG per row (your merged rows)
   const ROW_SVGS = {
-    marq1: ['assets/svg/MARQUEE-3.svg'],
+    marq1: ['assets/svg/MARQUEE-1.svg'],
     marq2: ['assets/svg/MARQUEE-2.svg'],
     marq3: ['assets/svg/MARQUEE-1.svg'],
   };
