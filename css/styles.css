@@ -169,6 +169,7 @@ figure { margin: 0; }
 .marquee-track {
   display: flex;
   align-items: center;
+  gap: 0;
   will-change: transform;
   transform: translate3d(0,0,0);
 }
@@ -177,15 +178,16 @@ figure { margin: 0; }
 .marquee-group {
   display: inline-flex;
   align-items: center;
-  height: 86vh;
+  height: 100%;
+  gap: 0;
 }
 
 /* Items (either <img> SVGs or inline <svg>) */
 .marquee-item img,
 .marquee-item svg {
-  max-height: 70%; /* scale visuals relative to row height */
   width: auto;
-  height: 80vh;
+  object-fit: contain;
+  height: clamp(28px, 60%, 96px);
   display: block;
   color: var(--deepblack);
 }
