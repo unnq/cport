@@ -159,6 +159,7 @@ figure { margin: 0; }
 .marquee-row {
   flex: 1;
   display: flex;
+  contain: paint;
   overflow: hidden;
   align-items: center;
   margin: 0;
@@ -171,7 +172,7 @@ figure { margin: 0; }
   align-items: center;
   gap: 0;
   will-change: transform;
-  transform: translate3d(0,0,0);
+  transform: translatez(0);
 }
 
 .marquee-track.glow {
