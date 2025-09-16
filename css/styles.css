@@ -169,7 +169,6 @@ figure { margin: 0; }
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: clamp(24px, 3vw, 56px); /* space between items */
   will-change: transform;
   transform: translate3d(0,0,0);
 }
