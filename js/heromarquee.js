@@ -1,65 +1,63 @@
 /* heromarquee.js
    - Infinite marquee with seamless looping.
    - Each row fills 1/3 of .hero-top via flex.
-   - SVGs optional; large fallback text shown if arrays empty.
+   - Loads SVGs inline (fetch + DOMParser). Falls back to <img> if needed.
 */
 
 (() => {
   const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // 1) Put your SVG file paths here when ready:
-const ROW_SVGS = {
-  marq1: [
-    'assets/svg/aeg.svg',
-    'assets/svg/bjork.svg',
-    'assets/svg/Asset15.svg',
-    'assets/svg/cutla.svg',
-    'assets/svg/cutla2.svg',
-    'assets/svg/doron.svg',
-    'assets/svg/ecco.svg',
-    'assets/svg/golden eye.svg',
-    'assets/svg/hga.svg',
-    'assets/svg/kyoto.svg',
-    'assets/svg/nike.svg',
-    'assets/svg/rebel.svg',
-    'assets/svg/silvia.svg',
-    'assets/svg/traphaus.svg'
-  ], // top row (original order)
+  const ROW_SVGS = {
+    marq1: [
+      'assets/svg/aeg.svg',
+      'assets/svg/bjork.svg',
+      'assets/svg/Asset15.svg',
+      'assets/svg/cutla.svg',
+      'assets/svg/cutla2.svg',
+      'assets/svg/doron.svg',
+      'assets/svg/ecco.svg',
+      'assets/svg/golden eye.svg',
+      'assets/svg/hga.svg',
+      'assets/svg/kyoto.svg',
+      'assets/svg/nike.svg',
+      'assets/svg/rebel.svg',
+      'assets/svg/silvia.svg',
+      'assets/svg/traphaus.svg'
+    ], // top row
 
-  marq2: [
-    'assets/svg/aeg.svg',
-    'assets/svg/bjork.svg',
-    'assets/svg/cutla.svg',
-    'assets/svg/cutla2.svg',
-    'assets/svg/doron.svg',
-    'assets/svg/ecco.svg',
-    'assets/svg/golden eye.svg',
-    'assets/svg/hga.svg',
-    'assets/svg/kyoto.svg',
-    'assets/svg/nike.svg',
-    'assets/svg/rebel.svg',
-    'assets/svg/silvia.svg',
-    'assets/svg/traphaus.svg'
-  ], // middle row (original order)
+    marq2: [
+      'assets/svg/aeg.svg',
+      'assets/svg/bjork.svg',
+      'assets/svg/cutla.svg',
+      'assets/svg/cutla2.svg',
+      'assets/svg/doron.svg',
+      'assets/svg/ecco.svg',
+      'assets/svg/golden eye.svg',
+      'assets/svg/hga.svg',
+      'assets/svg/kyoto.svg',
+      'assets/svg/nike.svg',
+      'assets/svg/rebel.svg',
+      'assets/svg/silvia.svg',
+      'assets/svg/traphaus.svg'
+    ], // middle row
 
-  marq3: [
-    'assets/svg/rebel.svg',
-    'assets/svg/ecco.svg',
-    'assets/svg/nike.svg',
-    'assets/svg/cutla2.svg',
-    'assets/svg/bjork.svg',
-    'assets/svg/hga.svg',
-    'assets/svg/aeg.svg',
-    'assets/svg/silvia.svg',
-    'assets/svg/doron.svg',
-    'assets/svg/traphaus.svg',
-    'assets/svg/kyoto.svg',
-    'assets/svg/golden eye.svg',
-    'assets/svg/cutla.svg'
-  ]  // bottom row (mixed order)
-};
-
-
+    marq3: [
+      'assets/svg/rebel.svg',
+      'assets/svg/ecco.svg',
+      'assets/svg/nike.svg',
+      'assets/svg/cutla2.svg',
+      'assets/svg/bjork.svg',
+      'assets/svg/hga.svg',
+      'assets/svg/aeg.svg',
+      'assets/svg/silvia.svg',
+      'assets/svg/doron.svg',
+      'assets/svg/traphaus.svg',
+      'assets/svg/kyoto.svg',
+      'assets/svg/golden eye.svg',
+      'assets/svg/cutla.svg'
+    ]  // bottom row (mixed order)
+  };
 
   // 2) Fallback text (repeated to form a loop)
   const FALLBACK_TEXT = {
@@ -81,6 +79,31 @@ const ROW_SVGS = {
     img.alt = '';
     wrap.appendChild(img);
     return wrap;
+  }
+
+  async function makeInlineSvgItem(src) {
+    const wrap = document.createElement('div');
+    wrap.className = 'marquee-item';
+
+    try {
+      const res = await fetch(src, { mode: 'same-origin' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      const doc = new DOMParser().parseFromString(text, 'image/svg+xml');
+      const svg = doc.documentElement;
+
+      // Normalize sizing so CSS controls it
+      svg.removeAttribute('width');
+      svg.removeAttribute('height');
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.classList.add('marquee-svg');
+
+      wrap.appendChild(svg);
+      return wrap;
+    } catch (e) {
+      // Fallback to <img> if fetch/CORS fails
+      return makeImageItem(src);
+    }
   }
 
   function makeTextItem(txt) {
@@ -110,7 +133,7 @@ const ROW_SVGS = {
 
     let nodes;
     if (sources && sources.length) {
-      nodes = sources.map(makeImageItem);
+      nodes = await Promise.all(sources.map(makeInlineSvgItem));
     } else {
       // repeat fallback text to ensure enough width for looping
       const repeats = 4; // adjust if you want denser line
@@ -125,10 +148,16 @@ const ROW_SVGS = {
     trackEl.appendChild(groupA);
     trackEl.appendChild(groupB);
 
+    // If any <img> fallbacks exist, wait for them to decode
     await loadImages(trackEl);
 
-    // Width after layout (we need this for wrapping logic)
-    const w = groupA.getBoundingClientRect().width;
+    // Give one animation frame for layout to settle, then measure robustly
+    await new Promise(r => requestAnimationFrame(r));
+    const group = trackEl.querySelector('.marquee-group');
+    const wRect = group?.getBoundingClientRect().width || 0;
+    const wScroll = group?.scrollWidth || 0;
+    const w = Math.max(wRect, wScroll, trackEl.clientWidth || 0);
+
     return { groupWidth: w };
   }
 
