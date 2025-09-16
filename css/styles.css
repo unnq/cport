@@ -187,7 +187,7 @@ figure { margin: 0; }
 .marquee-item svg {
   max-height: 70%; /* scale visuals relative to row height */
   width: auto;
-  clamp(20vh, 28vh, 32vh);
+  height: clamp(20vh, 28vh, 32vh);
   display: block;
   color: var(--deepblack);
 }
