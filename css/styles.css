@@ -178,7 +178,6 @@ figure { margin: 0; }
 .marquee-group {
   display: inline-flex;
   align-items: center;
-  gap: inherit;
   height: 10vh;
 }
 
