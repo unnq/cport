@@ -228,6 +228,10 @@ figure { margin: 0; }
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
   color: var(--lightgray);
   font-family: var(--font-body);
+  text-shadow: 
+    0 0 4px rgba(255,255,255,0.8),
+    0 0 8px rgba(255,255,255,0.6),
+    0 0 12px rgba(255,255,255,0.5);
 }
 #hero h1 {
   margin: 0 0 -3.5vw -2vw;       /* intentional overlap into white strip */
