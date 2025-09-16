@@ -8,12 +8,54 @@
   const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // 1) Put your SVG file paths here when ready:
-  // e.g., ['assets/svg/lockup.svg','assets/svg/mark.svg', ...]
-  const ROW_SVGS = {
-    marq1: ['assets/svg/aeg.svg'], // top row
-    marq2: [], // middle row
-    marq3: []  // bottom row
-  };
+const ROW_SVGS = {
+  marq1: [
+    'assets/svg/aeg.svg',
+    'assets/svg/bjork.svg',
+    'assets/svg/cutla.svg',
+    'assets/svg/cutla2.svg',
+    'assets/svg/doron.svg',
+    'assets/svg/ecco.svg',
+    'assets/svg/golden eye.svg',
+    'assets/svg/hga.svg',
+    'assets/svg/kyoto.svg',
+    'assets/svg/nike.svg',
+    'assets/svg/rebel.svg',
+    'assets/svg/silvia.svg',
+    'assets/svg/traphaus.svg'
+  ], // top row
+  marq2: [
+    'assets/svg/aeg.svg',
+    'assets/svg/bjork.svg',
+    'assets/svg/cutla.svg',
+    'assets/svg/cutla2.svg',
+    'assets/svg/doron.svg',
+    'assets/svg/ecco.svg',
+    'assets/svg/golden eye.svg',
+    'assets/svg/hga.svg',
+    'assets/svg/kyoto.svg',
+    'assets/svg/nike.svg',
+    'assets/svg/rebel.svg',
+    'assets/svg/silvia.svg',
+    'assets/svg/traphaus.svg'
+  ], // middle row
+  marq3: [
+    'assets/svg/aeg.svg',
+    'assets/svg/bjork.svg',
+    'assets/svg/cutla.svg',
+    'assets/svg/cutla2.svg',
+    'assets/svg/doron.svg',
+    'assets/svg/ecco.svg',
+    'assets/svg/golden eye.svg',
+    'assets/svg/hga.svg',
+    'assets/svg/kyoto.svg',
+    'assets/svg/nike.svg',
+    'assets/svg/rebel.svg',
+    'assets/svg/silvia.svg',
+    'assets/svg/traphaus.svg'
+  ]  // bottom row
+};
+
 
   // 2) Fallback text (repeated to form a loop)
   const FALLBACK_TEXT = {
