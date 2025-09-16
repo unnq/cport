@@ -10,7 +10,7 @@
   // 1) Put your SVG file paths here when ready:
   // e.g., ['assets/svg/lockup.svg','assets/svg/mark.svg', ...]
   const ROW_SVGS = {
-    marq1: [], // top row
+    marq1: ['assets/svg/aeg.svg'], // top row
     marq2: [], // middle row
     marq3: []  // bottom row
   };
