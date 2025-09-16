@@ -1,11 +1,11 @@
 // noise.js — true static grain for any [data-noise] element
 (() => {
   const SETTINGS = {
-    dpr: 2,            // render scale
-    fps: 120,           // cap the refresh rate
+    dpr: 1,            // render scale
+    fps: 60,           // cap the refresh rate
     opacity: 0.06,     // overall strength (0..1)
-    scale: 1.5,          // 1 = fine, higher = chunkier
-    tile: 64,         // base tile size (CSS px before DPR & scale)
+    scale: 2,          // 1 = fine, higher = chunkier
+    tile: 128,         // base tile size (CSS px before DPR & scale)
     layers: 1,         // blend N independently reseeded layers
     monochrome: true,  // true = grayscale noise
     blend: "normal",   // "normal", "screen", "overlay", etc.
