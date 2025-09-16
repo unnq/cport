@@ -179,6 +179,7 @@ figure { margin: 0; }
   display: inline-flex;
   align-items: center;
   gap: inherit;
+  height: 10vh;
 }
 
 /* Items (either <img> SVGs or inline <svg>) */
