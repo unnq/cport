@@ -178,7 +178,7 @@ figure { margin: 0; }
 .marquee-group {
   display: inline-flex;
   align-items: center;
-  height: 10vh;
+  height: 86vh;
 }
 
 /* Items (either <img> SVGs or inline <svg>) */
