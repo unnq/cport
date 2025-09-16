@@ -2,7 +2,7 @@
 (() => {
   const SETTINGS = {
     dpr: 1,            // render scale
-    fps: 60,           // cap the refresh rate
+    fps: 30,           // cap the refresh rate
     opacity: 0.06,     // overall strength (0..1)
     scale: 2,          // 1 = fine, higher = chunkier
     tile: 128,         // base tile size (CSS px before DPR & scale)
