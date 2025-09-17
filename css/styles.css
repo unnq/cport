@@ -476,7 +476,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #111;
+  color: var(--closewhite);
 }
 .footer-col ul {
   margin: 0; padding: 0;
