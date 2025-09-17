@@ -313,7 +313,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 
 .collection-col a{
   text-decoration: none;
-  color: var(--deepblack);
+  color: var(--closewhite);
   font-weight: 500;
 }
 
@@ -526,8 +526,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
    Port Preview
    ========================= */
 #portpreview {
-  background-color: var(--closewhite);
-  
+  background-color: var(--heroblack);
 }
 
 #portpreview .port-top {
@@ -625,7 +624,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 
 /* Title with top space + your negative offsets */
 #portpreview .port-title {
-  color: var(--deepblack);
+  color: var(--closewhite);
   font-family: var(--font-title);
   font-weight: 700;
   letter-spacing: -0.01em;  
@@ -637,7 +636,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 }
 
 .exspot {
-   color: var(--deepblack);
+   color: var(--closewhite);
    font-family: var(--font-title);
    font-weight: 700;
    letter-spacing: -0.01em;
