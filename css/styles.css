@@ -260,9 +260,9 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 /* --- Hero strip: content layout --- */
 .hero-strip {
   grid-row: 2;
-  background: var(--closewhite);
-  height: 40vh;                       /* your existing height */
-  color: var(--deepblack);             /* dark text on white */
+  background: var(--heroblack);
+  height: 40vh;                      
+  color: var(--closewhite);             
   position: relative;
 }
 
