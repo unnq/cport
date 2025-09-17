@@ -427,7 +427,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: clamp(16px, 2vw, 28px);
-  padding: clamp(24px, 4vw, 56px);
+  padding: clamp(12px, 2vw, 28px);
 }
 
 /* Left (cols 1-2) */
