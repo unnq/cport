@@ -419,7 +419,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   color: var(--closewhite);
   display: grid;
   grid-template-rows: 1fr 4vh;
-  border-top: 1px solid rgba(0,0,0,0.08);
+  border-top: 1px solid var(--lightgray);
   margin-top: auto;
 }
 
@@ -496,7 +496,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   place-items: center;
   font-weight: 700;
   text-transform: uppercase;
-  border: 1px dashed var(--closewhite);
+  border: 1px dashed var(--lightgray);
   border-radius: 8px;
 }
 
@@ -504,7 +504,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 .footer-bottom {
   background: var(--heroblack);
   color: var(--closewhite);
-  border-top: 1px solid rgba(0,0,0,0.08);
+  border-top: 1px solid var(--lightgray);
   font-family: "Sono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   display: flex;
   align-items: center;
