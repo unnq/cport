@@ -138,7 +138,6 @@ figure { margin: 0; }
   overflow: hidden;              /* clip noise to hero */
   padding-top: 4vh;              /* clear fixed nav */
   box-sizing: border-box;        /* include padding in 100vh */
-  border-bottom: 1px solid var(--closewhite);
 }
 
 @media (max-width: 768px) {
