@@ -414,8 +414,8 @@ body.scrolling .marquee-track.glow { opacity: 1; }
    Footer
    ========================= */
 #site-footer {
-  background: var(--closewhite);
-  color: var(--deepblack);
+  background: var(--heroblack);
+  color: var(--closewhite);
   display: grid;
   grid-template-rows: 1fr 4vh;
   border-top: 1px solid rgba(0,0,0,0.08);
@@ -493,7 +493,8 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 
 /* Bottom bar */
 .footer-bottom {
-  background: var(--closewhite);
+  background: var(--heroblack);
+  color: var(--closewhite);
   border-top: 1px solid rgba(0,0,0,0.08);
   font-family: "Sono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   display: flex;
@@ -645,7 +646,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 
 /* Black panel that hosts the grid and the grain */
 #portpreview .portpanel {
-  background: var(--deepblack);
+  background: var(--heroblack);
   position: relative;   /* anchor for noise canvas */
   display: flex;
   flex-direction: column;
