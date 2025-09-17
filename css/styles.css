@@ -439,6 +439,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   justify-content: space-between;
   min-height: 20vh;
 }
+
 .footer-brand {
   margin: 0 0 8px 0;
   font-family: var(--font-title);
@@ -447,7 +448,14 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   font-weight: 700;
   color: var(--deepblack);
 }
-.footer-tag { margin: 0; max-width: 40ch; line-height: 1.4; color: #222; }
+
+.footer-tag { 
+   margin: 0; 
+   max-width: 40ch; 
+   line-height: 1.4; 
+   color: #var(closewhite; 
+}
+
 .footer-arrow {
   position: absolute;
   right: 1em; bottom: 0;
