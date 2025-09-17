@@ -238,6 +238,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
 
 #hero .subtitle {
   margin: 0 0 0.25rem 0;
+  font-weight: 400;
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
   color: var(--lightgray);
   font-family: var(--font-body);
