@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* sticky footer pattern */
-  text-decoration: uppercase;
+  text-transform: uppercase;
 }
 main { flex: 1 0 auto; }
 
