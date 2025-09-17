@@ -553,7 +553,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   font-size: clamp(18px, 2.2vw, 28px);
   line-height: 1;
   text-decoration: none;
-   color: var--(closewhite);
+   color: var(--closewhite);
 }
 
 /* Ensure .port-top is the positioning context (you already have position:relative) */
