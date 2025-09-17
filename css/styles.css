@@ -441,9 +441,6 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   min-height: 20vh;
 }
 
-.footer-left .nav-logo {
-   align-self: left;
-}
 
 .footer-brand {
   margin: 0 0 8px 0;
