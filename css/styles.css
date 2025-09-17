@@ -24,6 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* sticky footer pattern */
+  text-decoration: uppercase;
 }
 main { flex: 1 0 auto; }
 
@@ -495,7 +496,7 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   place-items: center;
   font-weight: 700;
   text-transform: uppercase;
-  border: 1px dashed rgba(0,0,0,0.15);
+  border: 1px dashed var(--closewhite);
   border-radius: 8px;
 }
 
@@ -551,8 +552,8 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   bottom: 12px;
   font-size: clamp(18px, 2.2vw, 28px);
   line-height: 1;
-  color: var(--deepblack);
   text-decoration: none;
+   color: var--(closewhite);
 }
 
 /* Ensure .port-top is the positioning context (you already have position:relative) */
