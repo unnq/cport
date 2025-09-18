@@ -754,7 +754,6 @@ body.scrolling .marquee-track.glow { opacity: 1; }
   display: inline-flex;
   align-items: center;
   gap: 0.5ch;
-  border-bottom: 1px dashed currentColor; /* same look as port-cta */
   text-decoration: none;
   color: inherit; /* inherit from parent */
   line-height: 1.1;
