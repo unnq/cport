@@ -149,7 +149,7 @@ figure { margin: 0; }
   flex-direction: column;
   background: var(--heroblack);
   overflow: hidden;
-  margin: 6vh 6vw;
+  margin: 0vh 6vw 4vh 6vw;
   padding: 0;
   border-radius: 24px;
 }
